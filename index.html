@@ -1,0 +1,2227 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>روزنگار سلامتی دانش‌آموز</title>
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#1F2347">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="روزنگار سلامتی دانش‌آموز">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="icon" href="./icon-192.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=Lalezar&display=swap" rel="stylesheet">
+  <style>
+    :root { --c-ink: #232539; --c-ink-soft: #6B6E85; --c-linen: #FBF8F2; --c-card: #FFFFFF; --c-track: #E9E2D3; --c-line: #E7E2D6; --c-sleep: #1F2347; --c-sleep-soft: #E7E6EF; --c-nutrition: #4F9A68; --c-nutrition-soft: #E3EFE3; --c-exercise: #F07A52; --c-exercise-soft: #FCE6DC; --c-gold: #F2B441; --c-excellent: #3F8F5C; --c-good: #4F9A68; --c-fair: #E08A3C; --c-care: #D9684A; --shadow-1: 0 2px 10px rgba(31,35,71,0.06); --shadow-2: 0 14px 34px rgba(31,35,71,0.10); --radius-lg: 22px; --radius-md: 16px; --radius-sm: 12px; --font: 'Vazirmatn', Tahoma, sans-serif; }
+    [data-theme="dark"] { --c-ink: #E8E6E0; --c-ink-soft: #A8A6B0; --c-linen: #1A1C28; --c-card: #262838; --c-track: #3A3C50; --c-line: #3A3C50; --c-sleep: #A8B5E0; --c-sleep-soft: #2E3050; --c-nutrition: #6DB88A; --c-nutrition-soft: #2A4A3A; --c-exercise: #F08A6A; --c-exercise-soft: #4A2E2A; --shadow-1: 0 2px 10px rgba(0,0,0,0.3); --shadow-2: 0 14px 34px rgba(0,0,0,0.4); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body { background: var(--c-linen); color: var(--c-ink); font-family: var(--font); min-height: 100vh; -webkit-font-smoothing: antialiased; transition: background 0.3s, color 0.3s; }
+    .display { font-family: 'Lalezar', var(--font); }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    :focus-visible { outline: 2.5px solid var(--c-gold); outline-offset: 3px; border-radius: 6px; }
+    .shell { max-width: 1080px; margin: 0 auto; padding: 18px 16px 60px; }
+    .profile-bar { display: flex; align-items: center; gap: 14px; background: var(--c-card); border-radius: var(--radius-lg); padding: 14px 20px; box-shadow: var(--shadow-1); margin-bottom: 16px; border: 1px solid var(--c-line); transition: background 0.3s, border 0.3s; }
+    .profile-avatar { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, var(--c-sleep), var(--c-exercise)); display: flex; align-items: center; justify-content: center; font-size: 22px; color: #fff; flex: none; font-family: 'Lalezar', var(--font); cursor: pointer; transition: transform 0.2s; box-shadow: 0 4px 12px rgba(31,35,71,0.15); }
+    .profile-avatar:hover { transform: scale(1.05); }
+    .profile-info { flex: 1; min-width: 0; }
+    .profile-name { font-family: 'Lalezar', var(--font); font-size: 20px; color: var(--c-gold); line-height: 1.2; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .profile-name .badge-gold { font-size: 11px; font-family: var(--font); font-weight: 700; color: #fff; background: var(--c-gold); padding: 2px 10px; border-radius: 999px; }
+    .profile-name .badge-guest { font-size: 11px; font-family: var(--font); font-weight: 600; color: var(--c-ink-soft); background: var(--c-linen); padding: 2px 10px; border-radius: 999px; border: 1px solid var(--c-line); }
+    .profile-details { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--c-ink-soft); margin-top: 2px; }
+    .profile-details span { display: flex; align-items: center; gap: 4px; }
+    .profile-details .detail-val { font-weight: 700; color: var(--c-ink); }
+    .profile-edit-btn { background: var(--c-linen); border: 1px solid var(--c-line); border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 600; color: var(--c-ink-soft); transition: 0.15s; flex: none; white-space: nowrap; }
+    .profile-edit-btn:hover { border-color: var(--c-gold); color: var(--c-ink); background: var(--c-card); }
+    .profile-modal .modal-box { max-width: 420px; }
+    .profile-modal .settings-field { margin-bottom: 14px; }
+    .profile-modal .settings-field label { display: block; font-size: 12.5px; font-weight: 600; color: var(--c-ink-soft); margin-bottom: 4px; }
+    .profile-modal .settings-field input { width: 100%; padding: 10px 14px; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm); font-size: 14px; font-family: inherit; background: var(--c-linen); color: var(--c-ink); transition: 0.2s; }
+    .profile-modal .settings-field input:focus { border-color: var(--c-gold); background: var(--c-card); outline: none; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; padding: 6px 4px 12px; flex-wrap: wrap; gap: 10px; }
+    .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .brand-mark { width: 34px; height: 34px; flex: none; }
+    .brand-text .title { font-family: 'Lalezar', sans-serif; font-size: 21px; color: var(--c-sleep); line-height: 1; }
+    .brand-text .subtitle { font-size: 11.5px; color: var(--c-ink-soft); margin-top: 3px; }
+    .topbar-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .lang-toggle, .theme-toggle, .alarm-toggle { background: var(--c-card); border: 1px solid var(--c-line); border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 600; box-shadow: var(--shadow-1); color: var(--c-ink-soft); transition: 0.15s; display: flex; align-items: center; gap: 4px; }
+    .lang-toggle:hover, .theme-toggle:hover, .alarm-toggle:hover { border-color: var(--c-gold); color: var(--c-sleep); }
+    .alarm-toggle .badge { background: var(--c-care); color: #fff; border-radius: 50%; font-size: 10px; padding: 1px 6px; min-width: 18px; text-align: center; }
+    .streak-pill { display: flex; align-items: center; gap: 5px; background: var(--c-card); border: 1px solid var(--c-line); border-radius: 999px; padding: 7px 13px; font-size: 13px; font-weight: 600; box-shadow: var(--shadow-1); white-space: nowrap; }
+    .horizon-bar { height: 4px; border-radius: 4px; margin-bottom: 18px; background: linear-gradient(90deg, var(--c-sleep), var(--c-nutrition), var(--c-exercise)); opacity: 0.85; }
+    .layout { display: grid; grid-template-columns: 1fr; gap: 18px; }
+    @media (min-width: 900px) { .layout { grid-template-columns: 380px 1fr; align-items: start; } .panel-left { position: sticky; top: 18px; } }
+    .panel-left, .panel-right { display: flex; flex-direction: column; gap: 18px; }
+    .card { background: var(--c-card); border-radius: var(--radius-lg); box-shadow: var(--shadow-2); padding: 22px; transition: background 0.3s, box-shadow 0.3s; }
+    .card-title { font-size: 15px; font-weight: 700; margin: 0 0 4px; }
+    .card-subtitle { font-size: 12.5px; color: var(--c-ink-soft); margin: 0 0 16px; }
+    .gauge-card { padding-bottom: 14px; }
+    .gauge-wrap { position: relative; max-width: 300px; margin: 0 auto; }
+    .gauge-wrap svg { width: 100%; display: block; }
+    .gauge-icon { font-size: 21px; text-anchor: middle; user-select: none; }
+    .gauge-overlay { position: absolute; top: 59%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 78%; }
+    .score-num { font-weight: 800; font-size: 52px; line-height: 1; letter-spacing: -1px; }
+    .score-label { font-size: 12.5px; color: var(--c-ink-soft); font-weight: 600; margin-top: 2px; }
+    .score-tier { display: inline-block; font-size: 12.5px; font-weight: 700; margin-top: 8px; padding: 3px 12px; border-radius: 999px; }
+    .gauge-date { text-align: center; font-size: 12.5px; color: var(--c-ink-soft); margin-top: 2px; }
+    .group { padding-top: 16px; border-top: 1px solid var(--c-line); }
+    .group:first-of-type { padding-top: 0; border-top: none; }
+    .group-head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .group-icon { width: 32px; height: 32px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex: none; }
+    .group-title { font-size: 14.5px; font-weight: 700; }
+    .group[data-cat="sleep"] .group-icon { background: var(--c-sleep-soft); color: var(--c-sleep); }
+    .group[data-cat="nutrition"] .group-icon { background: var(--c-nutrition-soft); color: var(--c-nutrition); }
+    .group[data-cat="exercise"] .group-icon { background: var(--c-exercise-soft); color: var(--c-exercise); }
+    .field { margin-bottom: 14px; }
+    .field:last-child { margin-bottom: 0; }
+    .field-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; gap: 8px; flex-wrap: wrap; }
+    .field-label { font-size: 13px; color: var(--c-ink-soft); font-weight: 600; }
+    .field-value { font-size: 13px; font-weight: 700; }
+    .input-group { display: flex; align-items: center; gap: 8px; background: var(--c-linen); border-radius: var(--radius-sm); padding: 4px 8px; border: 1.5px solid var(--c-line); }
+    .input-group .field-value { min-width: 40px; text-align: center; font-size: 15px; }
+    .input-group .step-btn { width: 30px; height: 30px; border-radius: 50%; border: none; background: var(--c-card); color: var(--c-ink); font-size: 18px; font-weight: 700; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-1); transition: 0.15s; }
+    .input-group .step-btn:hover { background: var(--c-sleep); color: #fff; transform: scale(1.05); }
+    .input-group .step-btn:active { transform: scale(0.95); }
+    input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 999px; background: var(--c-track); outline: none; margin: 8px 0; pointer-events: none; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%; background: var(--accent, var(--c-sleep)); border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.2); cursor: grab; pointer-events: auto; touch-action: none; transition: 0.1s; }
+    input[type="range"]::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.12); }
+    input[type="range"]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; border: 3px solid #fff; background: var(--accent, var(--c-sleep)); box-shadow: 0 2px 8px rgba(0,0,0,0.2); cursor: grab; pointer-events: auto; touch-action: none; }
+    input[type="range"]::-moz-range-thumb:active { cursor: grabbing; transform: scale(1.12); }
+    .group[data-cat="sleep"] input[type="range"] { --accent: var(--c-sleep); }
+    .group[data-cat="nutrition"] input[type="range"] { --accent: var(--c-nutrition); }
+    .group[data-cat="exercise"] input[type="range"] { --accent: var(--c-exercise); }
+    .chip-group { display: flex; gap: 6px; flex-wrap: wrap; }
+    .chip { border: 1.5px solid var(--c-line); background: var(--c-card); color: var(--c-ink-soft); border-radius: 999px; padding: 7px 13px; font-size: 12.5px; font-weight: 600; transition: all .15s ease; flex: 1; text-align: center; min-width: 64px; }
+    .group[data-cat="sleep"] .chip.is-selected { background: var(--c-sleep); border-color: var(--c-sleep); color: #fff; }
+    .group[data-cat="nutrition"] .chip.is-selected { background: var(--c-nutrition); border-color: var(--c-nutrition); color: #fff; }
+    .group[data-cat="exercise"] .chip.is-selected { background: var(--c-exercise); border-color: var(--c-exercise); color: #fff; }
+    .chip:hover { border-color: var(--c-ink-soft); }
+    .save-btn { width: 100%; margin-top: 18px; padding: 15px; border: none; border-radius: var(--radius-md); background: linear-gradient(90deg, var(--c-sleep), var(--c-exercise)); color: #fff; font-size: 15px; font-weight: 700; box-shadow: var(--shadow-1); transition: transform .12s ease, box-shadow .12s ease; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .save-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-2); }
+    .save-btn:active { transform: translateY(0); }
+    .save-btn:disabled { opacity: .6; cursor: default; transform: none; }
+    .save-status { font-size: 12px; font-weight: 600; color: var(--c-ink-soft); background: var(--c-linen); padding: 2px 10px; border-radius: 999px; border: 1px solid var(--c-line); transition: 0.2s; }
+    .save-status.saved { color: var(--c-nutrition); border-color: var(--c-nutrition); }
+    .save-status.saving { color: var(--c-exercise); border-color: var(--c-exercise); }
+    .icon-btn { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--c-line); background: var(--c-card); color: var(--c-ink-soft); flex: none; box-shadow: var(--shadow-1); }
+    .icon-btn:hover { color: var(--c-sleep); border-color: var(--c-sleep); }
+    .icon-btn svg { width: 18px; height: 18px; }
+    .group[data-cat="health"] .group-icon { background: #FBEFE0; color: #C97A1E; }
+    .optional-tag { font-size: 10.5px; font-weight: 600; color: var(--c-ink-soft); background: var(--c-linen); padding: 2px 8px; border-radius: 999px; margin-right: 6px; }
+    .health-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .health-grid .field-full { grid-column: 1 / -1; }
+    .num-input { width: 100%; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 13.5px; font-family: inherit; color: var(--c-ink); background: var(--c-linen); outline: none; transition: border 0.2s, background 0.2s; }
+    .num-input:focus { border-color: var(--c-gold); background: var(--c-card); }
+    .mood-row { display: flex; gap: 6px; justify-content: space-between; }
+    .mood-chip { flex: 1; border: 1.5px solid var(--c-line); background: var(--c-card); border-radius: var(--radius-sm); padding: 9px 4px; font-size: 20px; text-align: center; line-height: 1; }
+    .mood-chip.is-selected { border-color: #C97A1E; background: #FBEFE0; }
+    [data-theme="dark"] .mood-chip.is-selected { background: #4A3A2A; border-color: #C97A1E; }
+    .bmi-readout { font-size: 12px; color: var(--c-ink-soft); margin-top: 6px; font-weight: 600; }
+    .bmi-readout b { color: var(--c-ink); font-weight: 700; }
+    .goal-row { margin-bottom: 13px; }
+    .goal-row:last-child { margin-bottom: 0; }
+    .goal-row-head { display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 600; margin-bottom: 6px; }
+    .goal-row-head .goal-pct { color: var(--c-ink-soft); font-weight: 700; }
+    .goal-track { height: 8px; border-radius: 999px; background: var(--c-track); overflow: hidden; }
+    .goal-fill { height: 100%; border-radius: 999px; transition: width .4s ease; }
+    .analysis-box { display: flex; flex-direction: column; gap: 10px; }
+    .analysis-item { display: flex; gap: 10px; align-items: flex-start; padding: 11px 12px; border-radius: var(--radius-sm); font-size: 12.5px; line-height: 1.7; }
+    .analysis-item b { display: block; font-size: 12px; margin-bottom: 2px; }
+    .analysis-item.is-strength { background: var(--c-nutrition-soft); color: #2E6B43; }
+    .analysis-item.is-weakness { background: var(--c-exercise-soft); color: #B85A3A; }
+    .analysis-item.is-suggestion { background: var(--c-sleep-soft); color: var(--c-sleep); }
+    .analysis-emoji { font-size: 17px; flex: none; }
+    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .stat-tile { background: var(--c-linen); border-radius: var(--radius-sm); padding: 12px; transition: background 0.3s; }
+    .stat-tile-label { font-size: 11.5px; color: var(--c-ink-soft); font-weight: 600; margin-bottom: 4px; }
+    .stat-tile-value { font-size: 17px; font-weight: 800; }
+    .stat-tile-sub { font-size: 11px; color: var(--c-ink-soft); margin-top: 2px; }
+    .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+    .cal-nav-btn { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--c-line); background: var(--c-card); color: var(--c-ink-soft); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+    .cal-nav-btn:hover { color: var(--c-sleep); border-color: var(--c-sleep); }
+    .cal-title { font-size: 13.5px; font-weight: 700; }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+    .cal-dow { font-size: 10.5px; color: var(--c-ink-soft); text-align: center; font-weight: 600; padding-bottom: 3px; }
+    .cal-cell { aspect-ratio: 1; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--c-ink-soft); background: var(--c-linen); position: relative; border: 1.5px solid transparent; cursor: default; transition: background 0.2s, border 0.2s; }
+    .cal-cell.has-data { color: #fff; cursor: pointer; }
+    .cal-cell.has-data:hover { transform: scale(1.04); }
+    .cal-cell.is-empty { visibility: hidden; }
+    .cal-cell.is-future { opacity: 0.45; cursor: default !important; pointer-events: none; }
+    .cal-cell.is-today { border-color: var(--c-gold); }
+    .cal-legend { display: flex; align-items: center; gap: 10px; margin-top: 12px; flex-wrap: wrap; font-size: 11px; color: var(--c-ink-soft); }
+    .cal-legend-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-left: 4px; }
+    .cal-search-row { display: flex; gap: 8px; margin-top: 10px; }
+    .cal-search-input { flex: 1; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 12.5px; font-family: inherit; color: var(--c-ink); background: var(--c-linen); outline: none; min-width: 0; }
+    .cal-search-input:focus { border-color: var(--c-gold); }
+    .cal-search-btn { background: var(--c-sleep); color: #fff; border: none; border-radius: var(--radius-sm); padding: 8px 16px; font-size: 12.5px; font-weight: 600; white-space: nowrap; }
+    .cal-search-btn:hover { background: var(--c-exercise); }
+    .history-list { display: flex; flex-direction: column; }
+    .history-row { display: flex; align-items: center; gap: 8px; padding: 11px 2px; border-bottom: 1px solid var(--c-line); }
+    .history-row:last-child { border-bottom: none; }
+    .history-date { flex: 1 1 auto; min-width: 0; font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .history-dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+    .history-score { font-size: 14px; font-weight: 800; min-width: 30px; text-align: left; flex: none; }
+    .history-edit, .history-del { background: none; border: none; color: var(--c-ink-soft); font-size: 15px; line-height: 1; padding: 5px 7px; border-radius: 6px; flex: none; display: flex; align-items: center; justify-content: center; }
+    .history-edit:hover { color: var(--c-sleep); background: var(--c-sleep-soft); }
+    .history-del:hover { color: var(--c-care); background: var(--c-exercise-soft); }
+    .history-edit svg { width: 15px; height: 15px; }
+    .todo-add-row { display: flex; gap: 8px; margin-bottom: 6px; }
+    .todo-input { flex: 1; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm); padding: 11px 14px; font-size: 13.5px; font-family: inherit; outline: none; color: var(--c-ink); background: var(--c-linen); }
+    .todo-input:focus { border-color: var(--c-gold); background: var(--c-card); }
+    .todo-add-btn { flex: none; width: 42px; height: 42px; border-radius: var(--radius-sm); border: none; background: var(--c-sleep); color: #fff; font-size: 20px; line-height: 1; display: flex; align-items: center; justify-content: center; }
+    .todo-add-btn:hover { background: var(--c-exercise); }
+    .todo-progress { font-size: 12px; color: var(--c-ink-soft); font-weight: 600; margin: 14px 2px 8px; }
+    .todo-list { display: flex; flex-direction: column; }
+    .todo-row { display: flex; align-items: center; gap: 10px; padding: 9px 2px; border-bottom: 1px solid var(--c-line); }
+    .todo-row:last-child { border-bottom: none; }
+    .todo-checkbox { width: 22px; height: 22px; border-radius: 7px; border: 2px solid var(--c-line); flex: none; display: flex; align-items: center; justify-content: center; background: var(--c-card); padding: 0; transition: all .15s ease; }
+    .todo-checkbox.is-done { background: var(--c-nutrition); border-color: var(--c-nutrition); }
+    .todo-checkbox svg { width: 13px; height: 13px; opacity: 0; transform: scale(.5); transition: all .15s ease; }
+    .todo-checkbox.is-done svg { opacity: 1; transform: scale(1); }
+    .todo-text { flex: 1; font-size: 13px; font-weight: 600; word-break: break-word; }
+    .todo-text .todo-time { display: block; font-size: 10.5px; font-weight: 400; color: var(--c-ink-soft); margin-top: 2px; }
+    .todo-text.is-done { color: var(--c-ink-soft); text-decoration: line-through; }
+    .todo-text.is-done .todo-time { text-decoration: none; }
+    .todo-del { background: none; border: none; color: var(--c-ink-soft); font-size: 16px; line-height: 1; padding: 4px 6px; border-radius: 6px; flex: none; }
+    .todo-del:hover { color: var(--c-care); background: var(--c-exercise-soft); }
+    .todo-edit { background: none; border: none; color: var(--c-ink-soft); line-height: 1; flex: none; padding: 5px 6px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+    .todo-edit:hover { color: var(--c-sleep); background: var(--c-sleep-soft); }
+    .todo-edit svg { width: 14px; height: 14px; }
+    .todo-move { display: flex; flex-direction: column; gap: 1px; flex: none; }
+    .todo-move-btn { background: none; border: none; color: var(--c-ink-soft); font-size: 9px; line-height: 1; padding: 2px 5px; border-radius: 4px; width: 22px; }
+    .todo-move-btn:hover { color: var(--c-sleep); background: var(--c-sleep-soft); }
+    .todo-move-btn:disabled { opacity: .25; }
+    .todo-move-btn:disabled:hover { background: none; color: var(--c-ink-soft); }
+    .todo-edit-row { display: flex; gap: 8px; align-items: center; flex: 1; }
+    .todo-edit-input { flex: 1; min-width: 0; border: 1.5px solid var(--c-gold); border-radius: var(--radius-sm); padding: 8px 11px; font-size: 13px; font-family: inherit; outline: none; background: var(--c-card); color: var(--c-ink); }
+    .todo-edit-save, .todo-edit-cancel { flex: none; width: 30px; height: 30px; border-radius: 8px; border: none; display: flex; align-items: center; justify-content: center; }
+    .todo-edit-save { background: var(--c-nutrition); color: #fff; }
+    .todo-edit-save svg { width: 14px; height: 14px; }
+    .todo-edit-cancel { background: var(--c-linen); color: var(--c-ink-soft); font-size: 16px; }
+    .chart-wrap { position: relative; }
+    .chart-wrap svg { width: 100%; height: auto; display: block; overflow: visible; }
+    .chart-point { cursor: pointer; }
+    .chart-tooltip { position: absolute; background: var(--c-ink); color: #fff; font-size: 11.5px; font-weight: 600; padding: 5px 9px; border-radius: 8px; transform: translate(-50%, -130%); white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity .12s ease; }
+    .chart-tooltip.visible { opacity: 1; }
+    .axis-label { font-size: 10.5px; fill: var(--c-ink-soft); }
+    .empty-state { text-align: center; padding: 28px 10px; color: var(--c-ink-soft); font-size: 13px; background: var(--c-linen); border-radius: var(--radius-md); }
+    .empty-state .emoji { font-size: 26px; display: block; margin-bottom: 8px; }
+    .edit-banner { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--c-exercise-soft); border: 1.5px solid var(--c-exercise); color: var(--c-exercise); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 12.5px; font-weight: 700; margin-bottom: 16px; }
+    .edit-banner-text { display: flex; align-items: center; gap: 6px; }
+    .edit-banner-cancel { background: var(--c-card); border: 1.5px solid var(--c-exercise); color: var(--c-exercise); border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 700; flex: none; }
+    .edit-banner-cancel:hover { background: var(--c-exercise); color: #fff; }
+    .install-banner { display: none; align-items: center; gap: 12px; background: var(--c-card); border: 1.5px solid var(--c-line); border-radius: var(--radius-md); padding: 13px 16px; box-shadow: var(--shadow-1); margin-bottom: 18px; }
+    .install-banner.visible { display: flex; }
+    .install-banner-icon { width: 38px; height: 38px; border-radius: 10px; flex: none; }
+    .install-banner-text { flex: 1; min-width: 0; }
+    .install-banner-title { font-size: 13px; font-weight: 700; }
+    .install-banner-sub { font-size: 11.5px; color: var(--c-ink-soft); margin-top: 1px; }
+    .install-banner-actions { display: flex; align-items: center; gap: 6px; flex: none; }
+    .install-btn { background: var(--c-sleep); color: #fff; border: none; border-radius: 999px; padding: 8px 16px; font-size: 12.5px; font-weight: 700; white-space: nowrap; }
+    .install-btn:hover { background: var(--c-exercise); }
+    .install-dismiss { background: none; border: none; color: var(--c-ink-soft); font-size: 18px; padding: 4px 6px; border-radius: 6px; }
+    .install-dismiss:hover { color: var(--c-care); background: var(--c-exercise-soft); }
+    .backup-row { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+    .backup-btn { flex: 1; background: var(--c-card); border: 1.5px solid var(--c-line); color: var(--c-ink); border-radius: var(--radius-sm); padding: 11px; font-size: 12.5px; font-weight: 700; min-width: 100px; }
+    .backup-btn:hover { border-color: var(--c-sleep); color: var(--c-sleep); }
+    .reset-link { background: none; border: none; color: var(--c-ink-soft); font-size: 12px; text-decoration: underline; padding: 6px; margin-top: 6px; }
+    .reset-link:hover { color: var(--c-care); }
+    .toast { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--c-ink); color: #fff; padding: 12px 22px; border-radius: 999px; font-size: 13.5px; font-weight: 600; box-shadow: var(--shadow-2); opacity: 0; pointer-events: none; transition: all .25s ease; z-index: 50; display: flex; align-items: center; gap: 7px; }
+    .toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(35,37,57,0.45); display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 60; opacity: 0; pointer-events: none; transition: opacity .18s ease; }
+    .modal-overlay.visible { opacity: 1; pointer-events: auto; }
+    .modal-box { background: var(--c-card); border-radius: var(--radius-lg); padding: 24px; max-width: 420px; width: 100%; box-shadow: var(--shadow-2); transform: scale(.96); transition: transform .18s ease; max-height: 90vh; overflow-y: auto; }
+    .modal-overlay.visible .modal-box { transform: scale(1); }
+    .modal-title { font-size: 18px; font-weight: 700; margin: 0 0 8px; }
+    .modal-text { font-size: 13.5px; color: var(--c-ink-soft); margin: 0 0 18px; line-height: 1.6; }
+    .modal-actions { display: flex; gap: 10px; }
+    .modal-actions button { flex: 1; padding: 11px; border-radius: var(--radius-sm); font-size: 13.5px; font-weight: 700; border: none; }
+    .btn-cancel { background: var(--c-linen); color: var(--c-ink); }
+    .btn-danger { background: var(--c-care); color: #fff; }
+    .btn-primary { background: var(--c-sleep); color: #fff; }
+    .btn-primary:hover { background: var(--c-exercise); }
+    .footer-row { text-align: center; margin-top: 8px; }
+    .steps-auto-badge { font-size: 11px; color: var(--c-ink-soft); background: var(--c-linen); padding: 4px 10px; border-radius: 999px; display: inline-block; margin-top: 4px; }
+    .voice-btn { background: var(--c-card); border: 1.5px solid var(--c-line); border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--c-ink-soft); transition: 0.15s; box-shadow: var(--shadow-1); flex: none; }
+    .voice-btn:hover { border-color: var(--c-gold); color: var(--c-sleep); }
+    .voice-btn.listening { border-color: #E74C3C; color: #E74C3C; box-shadow: 0 0 0 3px rgba(231,76,60,0.3); animation: pulse 1s infinite; }
+    .voice-btn:disabled { opacity: 0.5; pointer-events: none; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(231,76,60,0.4); } 70% { box-shadow: 0 0 0 8px rgba(231,76,60,0); } 100% { box-shadow: 0 0 0 0 rgba(231,76,60,0); } }
+    .voice-status { font-size: 12px; color: var(--c-ink-soft); margin-top: 6px; text-align: center; min-height: 50px; transition: 0.2s; line-height: 1.8; word-break: break-word; }
+    .voice-status.success { color: var(--c-nutrition); }
+    .voice-status.error { color: var(--c-care); }
+    .voice-status .transcript { font-weight: 600; color: var(--c-ink); background: var(--c-linen); padding: 2px 10px; border-radius: 999px; display: inline-block; margin-top: 2px; font-size: 11px; }
+    .voice-status .samples { font-size: 11px; color: var(--c-ink-soft); display: block; margin-top: 4px; opacity: 0.7; }
+    .alarm-card { background: var(--c-linen); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 10px; border: 1px solid var(--c-line); transition: all 0.2s; display: flex; align-items: center; gap: 12px; }
+    .alarm-card:last-child { margin-bottom: 0; }
+    .alarm-card.disabled { opacity: 0.5; }
+    .alarm-card .alarm-icon { font-size: 24px; flex: none; }
+    .alarm-card .alarm-info { flex: 1; min-width: 0; }
+    .alarm-card .alarm-title { font-weight: 700; font-size: 14px; }
+    .alarm-card .alarm-time { font-size: 20px; font-weight: 800; color: var(--c-sleep); font-family: 'Lalezar', var(--font); letter-spacing: 1px; }
+    .alarm-card .alarm-details { font-size: 11.5px; color: var(--c-ink-soft); margin-top: 2px; }
+    .alarm-card .alarm-actions { display: flex; gap: 6px; flex: none; }
+    .alarm-card .alarm-actions button { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--c-line); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--c-ink-soft); transition: 0.15s; background: var(--c-card); }
+    .alarm-card .alarm-actions button:hover { border-color: var(--c-gold); color: var(--c-sleep); }
+    .alarm-card .alarm-actions .toggle-btn.active { background: var(--c-nutrition); color: #fff; border-color: var(--c-nutrition); }
+    .alarm-card .alarm-actions .toggle-btn.inactive { background: var(--c-linen); color: var(--c-ink-soft); }
+    .alarm-card .alarm-actions .delete-btn:hover { color: var(--c-care); border-color: var(--c-care); }
+    .alarm-form-row { margin-bottom: 14px; }
+    .alarm-form-row label { display: block; font-size: 12.5px; font-weight: 600; color: var(--c-ink-soft); margin-bottom: 4px; }
+    .alarm-form-row input, .alarm-form-row select { width: 100%; padding: 10px 14px; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm); font-size: 14px; font-family: inherit; background: var(--c-linen); color: var(--c-ink); transition: 0.2s; }
+    .alarm-form-row input:focus, .alarm-form-row select:focus { border-color: var(--c-gold); background: var(--c-card); outline: none; }
+    .alarm-form-row .days-row { display: flex; gap: 6px; flex-wrap: wrap; }
+    .alarm-form-row .days-row .day-btn { padding: 6px 12px; border-radius: 999px; border: 1.5px solid var(--c-line); background: var(--c-card); color: var(--c-ink-soft); font-size: 12px; font-weight: 600; transition: 0.15s; cursor: pointer; }
+    .alarm-form-row .days-row .day-btn.active { background: var(--c-sleep); color: #fff; border-color: var(--c-sleep); }
+    .alarm-form-row .days-row .day-btn:hover:not(.active) { border-color: var(--c-gold); }
+    .alarm-form-row .repeat-select, .alarm-form-row .sound-select { width: 100%; padding: 10px 14px; border: 1.5px solid var(--c-line); border-radius: var(--radius-sm); font-size: 14px; font-family: inherit; background: var(--c-linen); color: var(--c-ink); }
+    .alarm-form-row .repeat-select:focus, .alarm-form-row .sound-select:focus { border-color: var(--c-gold); outline: none; }
+    .alarm-list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .alarm-list-header .count { font-size: 12px; color: var(--c-ink-soft); }
+    #alarmRingingOverlay .modal-box { max-width: 380px; text-align: center; }
+    #alarmRingingOverlay .alarm-ring-icon { font-size: 72px; display: block; margin: 0 auto 12px; animation: ring 0.5s ease-in-out infinite alternate; }
+    @keyframes ring { 0% { transform: rotate(-10deg); } 100% { transform: rotate(10deg); } }
+    #alarmRingingOverlay .alarm-ring-title { font-size: 22px; font-weight: 800; color: var(--c-care); margin-bottom: 8px; }
+    #alarmRingingOverlay .alarm-ring-details { font-size: 14px; color: var(--c-ink-soft); margin-bottom: 20px; }
+    #alarmRingingOverlay .dismiss-btn { width: 100%; padding: 14px; background: var(--c-care); color: #fff; border-radius: var(--radius-md); font-size: 16px; font-weight: 700; transition: 0.15s; }
+    #alarmRingingOverlay .dismiss-btn:hover { transform: scale(1.02); }
+
+    /* ===== Health Tips (Animated) ===== */
+    .tips-card { overflow: hidden; }
+    .tips-carousel { position: relative; min-height: 120px; }
+    .tip-slide {
+      display: none; align-items: flex-start; gap: 14px;
+      padding: 16px; border-radius: var(--radius-md);
+      background: var(--c-linen); border: 1px solid var(--c-line);
+      animation: tipFadeIn 0.55s ease both;
+    }
+    .tip-slide.active { display: flex; }
+    .tip-emoji {
+      font-size: 36px; flex: none; line-height: 1;
+      animation: tipBounce 1.8s ease-in-out infinite;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.08));
+    }
+    .tip-content { flex: 1; min-width: 0; }
+    .tip-title { font-size: 14px; font-weight: 800; margin-bottom: 4px; color: var(--c-sleep); }
+    .tip-text { font-size: 13px; line-height: 1.75; color: var(--c-ink-soft); font-weight: 500; }
+    .tips-dots { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+    .tip-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--c-track); border: none; padding: 0;
+      transition: transform 0.2s, background 0.2s; cursor: pointer;
+    }
+    .tip-dot.active { background: var(--c-gold); transform: scale(1.25); }
+    .tips-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; gap: 8px; }
+    .tips-nav-btn {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 1px solid var(--c-line); background: var(--c-card);
+      color: var(--c-ink-soft); display: flex; align-items: center; justify-content: center;
+      font-size: 16px; box-shadow: var(--shadow-1); transition: 0.15s;
+    }
+    .tips-nav-btn:hover { color: var(--c-sleep); border-color: var(--c-sleep); }
+    .tips-counter { font-size: 12px; font-weight: 700; color: var(--c-ink-soft); }
+    @keyframes tipFadeIn {
+      from { opacity: 0; transform: translateY(12px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes tipBounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      40% { transform: translateY(-6px) scale(1.08); }
+      60% { transform: translateY(-2px) scale(1.03); }
+    }
+    [data-theme="dark"] .tip-slide { background: var(--c-track); }
+    [data-theme="dark"] .tip-title { color: var(--c-gold); }
+
+    @media (prefers-reduced-motion: reduce) { * { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+
+  <div class="shell" id="appShell">
+    <!-- Profile bar, top bar, etc. (same as before) -->
+    <div class="profile-bar" id="profileBar">
+      <div class="profile-avatar" id="profileAvatar">👤</div>
+      <div class="profile-info">
+        <div class="profile-name" id="profileName">
+          <span id="profileDisplayName">کاربر</span>
+          <span class="badge-guest" id="profileBadge">👤</span>
+        </div>
+        <div class="profile-details" id="profileDetails">
+          <span>🎂 <span class="detail-val" id="profileAge">—</span> سال</span>
+          <span>📏 <span class="detail-val" id="profileHeight">—</span> سانتی‌متر</span>
+          <span>⚖️ <span class="detail-val" id="profileWeight">—</span> کیلوگرم</span>
+        </div>
+      </div>
+      <button class="profile-edit-btn" id="profileEditBtn">✎ ویرایش</button>
+    </div>
+
+    <div class="topbar">
+      <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 40 40">
+          <path d="M 36 22 A 16 16 0 0 0 4 22" fill="none" stroke="#E9E2D3" stroke-width="5" stroke-linecap="round"/>
+          <path d="M 36 22 A 16 16 0 0 0 20 6" fill="none" stroke="#F07A52" stroke-width="5" stroke-linecap="round"/>
+          <path d="M 14.4 7.6 A 16 16 0 0 0 4 22" fill="none" stroke="#1F2347" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="20" cy="22" r="3" fill="#F2B441"/>
+        </svg>
+        <div class="brand-text">
+          <div class="title" id="appTitle">روزنگار سلامتی دانش‌آموز</div>
+          <div class="subtitle" id="brandSubtitle">خواب، ورزش و تغذیه‌ی هر روزت</div>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button class="alarm-toggle" id="alarmToggleBtn" title="مدیریت آلارم‌ها">🔔 <span class="badge" id="alarmBadge">0</span></button>
+        <button class="lang-toggle" id="langToggle">🇬🇧 English</button>
+        <button class="theme-toggle" id="themeToggle">🌙</button>
+        <button class="icon-btn" id="settingsBtn" aria-label="تنظیمات">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M19.4 13a7.97 7.97 0 0 0 0-2l2.1-1.6-2-3.4-2.5 1a8 8 0 0 0-1.7-1L14.9 3h-4l-.4 2.9a8 8 0 0 0-1.7 1l-2.5-1-2 3.4L6.4 11a7.97 7.97 0 0 0 0 2l-2.1 1.6 2 3.4 2.5-1a8 8 0 0 0 1.7 1l.4 3h4l.4-2.9a8 8 0 0 0 1.7-1l2.5 1 2-3.4-2.1-1.6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.4"/></svg>
+        </button>
+        <div class="streak-pill" id="streakPill" style="display:none;">
+          <span>🔥</span><span id="streakNum">۰</span>
+        </div>
+      </div>
+    </div>
+    <div class="horizon-bar"></div>
+
+    <div class="install-banner" id="installBanner">
+      <img class="install-banner-icon" src="./icon-192.png" alt="">
+      <div class="install-banner-text">
+        <div class="install-banner-title" id="installTitle">روزنگار سلامتی دانش‌آموز رو نصب کن</div>
+        <div class="install-banner-sub" id="installSub">دسترسی سریع از صفحه اصلی گوشی، حتی بدون اینترنت</div>
+      </div>
+      <div class="install-banner-actions">
+        <button class="install-btn" id="installBtn">نصب</button>
+        <button class="install-dismiss" id="installDismiss" aria-label="بستن">×</button>
+      </div>
+    </div>
+
+    <div class="layout">
+      <!-- Left panel: gauge and form -->
+      <div class="panel-left">
+        <div class="card gauge-card">
+          <div class="gauge-wrap">
+            <svg viewBox="0 0 320 196">
+              <path id="gaugeTrack" fill="none" stroke="#E9E2D3" stroke-width="22" stroke-linecap="round"/>
+              <path id="seg-sleep" fill="none" stroke="#1F2347" stroke-width="22" stroke-linecap="round"/>
+              <path id="seg-nutrition" fill="none" stroke="#4F9A68" stroke-width="22" stroke-linecap="round"/>
+              <path id="seg-exercise" fill="none" stroke="#F07A52" stroke-width="22" stroke-linecap="round"/>
+              <text id="icon-sleep" class="gauge-icon">😴</text>
+              <text id="icon-nutrition" class="gauge-icon">🥗</text>
+              <text id="icon-exercise" class="gauge-icon">🏃</text>
+            </svg>
+            <div class="gauge-overlay">
+              <div class="score-num" id="scoreNum">۰</div>
+              <div class="score-label" id="scoreLabel">امتیاز امروز</div>
+              <div class="score-tier" id="scoreTier">—</div>
+            </div>
+          </div>
+          <div class="gauge-date" id="gaugeDate"></div>
+        </div>
+
+        <div class="card">
+          <div class="edit-banner" id="editBanner" style="display:none;">
+            <div class="edit-banner-text">✎ <span id="editBannerPrefix">در حال ویرایش روز</span> <span id="editBannerDate"></span></div>
+            <button class="edit-banner-cancel" id="cancelEditBtn">انصراف</button>
+          </div>
+
+          <!-- Sleep group -->
+          <div class="group" data-cat="sleep">
+            <div class="group-head"><div class="group-icon">😴</div><div class="group-title" id="sleepTitle">خواب</div></div>
+            <div class="field">
+              <div class="field-label-row">
+                <span class="field-label" id="sleepHoursLabel">ساعت خواب شب گذشته</span>
+                <div class="input-group">
+                  <button class="step-btn" id="sleepDec">−</button>
+                  <span class="field-value" id="sleepHoursVal">۰ ساعت</span>
+                  <button class="step-btn" id="sleepInc">+</button>
+                </div>
+              </div>
+              <input type="range" id="sleepHours" min="0" max="12" step="0.5" value="0">
+            </div>
+            <div class="field">
+              <div class="field-label-row"><span class="field-label" id="sleepQualityLabel">کیفیت خواب</span></div>
+              <div class="chip-group" data-group="sleepQuality" id="sleepQualityChips">
+                <button class="chip is-selected" data-value="0" id="sq0">ضعیف</button>
+                <button class="chip" data-value="1" id="sq1">متوسط</button>
+                <button class="chip" data-value="2" id="sq2">خوب</button>
+                <button class="chip" data-value="3" id="sq3">عالی</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nutrition group -->
+          <div class="group" data-cat="nutrition">
+            <div class="group-head"><div class="group-icon">🥗</div><div class="group-title" id="nutritionTitle">تغذیه</div></div>
+            <div class="field">
+              <div class="field-label-row"><span class="field-label" id="nutritionQualityLabel">کیفیت تغذیه امروز</span></div>
+              <div class="chip-group" data-group="nutritionQuality" id="nutritionQualityChips">
+                <button class="chip is-selected" data-value="0" id="nq0">ضعیف</button>
+                <button class="chip" data-value="1" id="nq1">متوسط</button>
+                <button class="chip" data-value="2" id="nq2">خوب</button>
+                <button class="chip" data-value="3" id="nq3">عالی</button>
+              </div>
+            </div>
+            <div class="field">
+              <div class="field-label-row">
+                <span class="field-label" id="waterLabel">آب مصرفی</span>
+                <div class="input-group">
+                  <button class="step-btn" id="waterDec">−</button>
+                  <span class="field-value" id="waterVal">۰ لیوان</span>
+                  <button class="step-btn" id="waterInc">+</button>
+                </div>
+              </div>
+              <input type="range" id="waterGlasses" min="0" max="20" step="1" value="0">
+            </div>
+          </div>
+
+          <!-- Exercise group -->
+          <div class="group" data-cat="exercise">
+            <div class="group-head"><div class="group-icon">🏃</div><div class="group-title" id="exerciseTitle">ورزش</div></div>
+            <div class="field">
+              <div class="field-label-row">
+                <span class="field-label" id="exerciseMinutesLabel">مدت فعالیت بدنی امروز</span>
+                <span class="field-value" id="exerciseMinutesVal">۰ دقیقه</span>
+              </div>
+              <input type="range" id="exerciseMinutes" min="0" max="120" step="5" value="0">
+            </div>
+            <div class="field">
+              <div class="field-label-row"><span class="field-label" id="intensityLabel">شدت فعالیت</span></div>
+              <div class="chip-group" data-group="exerciseIntensity" id="exerciseIntensityChips">
+                <button class="chip is-selected" data-value="0" id="ei0">استراحت</button>
+                <button class="chip" data-value="1" id="ei1">سبک</button>
+                <button class="chip" data-value="2" id="ei2">متوسط</button>
+                <button class="chip" data-value="3" id="ei3">شدید</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Steps group -->
+          <div class="group" data-cat="exercise">
+            <div class="group-head"><div class="group-icon">🚶</div><div class="group-title" id="stepsTitle">گام‌شمار <span class="optional-tag" id="optionalTag">اختیاری</span></div></div>
+            <div class="field">
+              <div class="field-label-row">
+                <span class="field-label" id="stepsLabel">تعداد قدم‌های امروز</span>
+                <span class="field-value" id="stepsVal">۰ قدم</span>
+              </div>
+              <input type="range" id="stepsInput" min="0" max="30000" step="100" value="0">
+              <div class="steps-auto-badge" id="stepsAutoBadge">⏳ در حال دریافت گام‌ها...</div>
+            </div>
+          </div>
+
+          <!-- Health extras -->
+          <div class="group" data-cat="health">
+            <div class="group-head"><div class="group-icon">➕</div><div class="group-title" id="healthTitle">سلامت تکمیلی <span class="optional-tag" id="healthOptional">اختیاری</span></div></div>
+            <div class="field">
+              <div class="field-label-row"><span class="field-label" id="moodLabel">خلق و خو</span></div>
+              <div class="mood-row" id="moodChips">
+                <button class="mood-chip" data-value="4">😀</button>
+                <button class="mood-chip" data-value="3">🙂</button>
+                <button class="mood-chip" data-value="2">😐</button>
+                <button class="mood-chip" data-value="1">😔</button>
+                <button class="mood-chip" data-value="0">😣</button>
+              </div>
+            </div>
+            <div class="field field-full">
+              <div class="health-grid">
+                <div class="field-full">
+                  <div class="field-label-row"><span class="field-label" id="weightLabel">وزن (کیلوگرم)</span></div>
+                  <input type="number" class="num-input" id="weightInput" min="20" max="300" step="0.1" placeholder="مثلاً ۷۰">
+                  <div class="bmi-readout" id="bmiReadout" style="display:none;"></div>
+                </div>
+                <div>
+                  <div class="field-label-row"><span class="field-label" id="bpSystolicLabel">فشار سیستول</span></div>
+                  <input type="number" class="num-input" id="bpSystolicInput" min="60" max="260" placeholder="۱۲۰">
+                </div>
+                <div>
+                  <div class="field-label-row"><span class="field-label" id="bpDiastolicLabel">فشار دیاستول</span></div>
+                  <input type="number" class="num-input" id="bpDiastolicInput" min="40" max="160" placeholder="۸۰">
+                </div>
+                <div class="field-full">
+                  <div class="field-label-row"><span class="field-label" id="pulseLabel">نبض (ضربان در دقیقه)</span></div>
+                  <input type="number" class="num-input" id="pulseInput" min="30" max="220" placeholder="۷۲">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:8px; margin-top:12px; align-items:center; flex-wrap:wrap;">
+            <button class="save-btn" id="saveBtn" style="flex:1; margin-top:0;">
+              <span id="saveBtnText">ثبت امتیاز امروز</span>
+              <span class="save-status" id="saveStatus"></span>
+            </button>
+            <button class="voice-btn" id="voiceBtn" aria-label="فعال‌سازی ورود صوتی" title="ورود صوتی (فارسی)">🎤</button>
+          </div>
+          <div class="voice-status" id="voiceStatus">
+            <span class="samples">📢 نمونه‌ها: «خواب ۸ ساعت، آب ۶ لیوان، ورزش ۳۰ دقیقه، تغذیه خوب»</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right panel -->
+      <div class="panel-right">
+        <!-- Goals card -->
+        <div class="card">
+          <div class="card-title" id="goalsTitle">اهداف امروز</div>
+          <div class="card-subtitle" id="goalsSub">پیشرفت نسبت به اهدافی که تنظیم کردی</div>
+          <div id="goalsBox">
+            <div class="goal-row"><div class="goal-row-head"><span>😴 <span id="goalSleepLabel">خواب</span></span><span class="goal-pct" id="goalSleepPct">—</span></div><div class="goal-track"><div class="goal-fill" id="goalSleepFill" style="width:0%; background:var(--c-sleep);"></div></div></div>
+            <div class="goal-row"><div class="goal-row-head"><span>🥗 <span id="goalWaterLabel">آب</span></span><span class="goal-pct" id="goalWaterPct">—</span></div><div class="goal-track"><div class="goal-fill" id="goalWaterFill" style="width:0%; background:var(--c-nutrition);"></div></div></div>
+            <div class="goal-row"><div class="goal-row-head"><span>🏃 <span id="goalExerciseLabel">ورزش</span></span><span class="goal-pct" id="goalExercisePct">—</span></div><div class="goal-track"><div class="goal-fill" id="goalExerciseFill" style="width:0%; background:var(--c-exercise);"></div></div></div>
+          </div>
+        </div>
+
+        <!-- Analysis -->
+        <div class="card">
+          <div class="card-title" id="analysisTitle">تحلیل هوشمند روز</div>
+          <div class="card-subtitle" id="analysisSub">بر اساس امتیاز ثبت‌شده‌ی این روز</div>
+          <div class="analysis-box" id="analysisBox">
+            <div class="empty-state"><span class="emoji">🧠</span><span id="analysisEmpty">بعد از ثبت امتیاز، تحلیل اینجا نمایش داده می‌شه.</span></div>
+          </div>
+        </div>
+
+        <!-- Health Tips (Animated) -->
+        <div class="card tips-card">
+          <div class="card-title" id="tipsTitle">💡 راهکارهای سلامتی</div>
+          <div class="card-subtitle" id="tipsSub">نکات کاربردی با انیمیشن برای هر روز</div>
+          <div class="tips-carousel" id="tipsCarousel">
+            <!-- slides injected by JS -->
+          </div>
+          <div class="tips-nav">
+            <button class="tips-nav-btn" id="tipsPrevBtn" aria-label="قبلی">‹</button>
+            <span class="tips-counter" id="tipsCounter">۱ / ۸</span>
+            <button class="tips-nav-btn" id="tipsNextBtn" aria-label="بعدی">›</button>
+          </div>
+          <div class="tips-dots" id="tipsDots"></div>
+        </div>
+
+        <!-- Todo -->
+        <div class="card">
+          <div class="card-title" id="todoTitle">کارهای مهم</div>
+          <div class="card-subtitle" id="todoSub">کارهایی که می‌خوای امروز انجام بدی</div>
+          <div class="todo-add-row"><input type="text" id="todoInput" class="todo-input" placeholder="یه کار جدید بنویس…" maxlength="120"><button class="todo-add-btn" id="todoAddBtn">+</button></div>
+          <div class="todo-progress" id="todoProgress" style="display:none;"></div>
+          <div class="todo-list" id="todoList"></div>
+        </div>
+
+        <!-- Chart -->
+        <div class="card">
+          <div class="card-title" id="chartTitle">روند روزهای اخیر</div>
+          <div class="card-subtitle" id="chartSub">آخرین ۱۴ روزی که امتیاز ثبت کردی</div>
+          <div class="chart-wrap" id="chartWrap"></div>
+        </div>
+
+        <!-- Calendar -->
+        <div class="card">
+          <div class="cal-head"><button class="cal-nav-btn" id="calPrevBtn">‹</button><div class="cal-title" id="calTitle">—</div><button class="cal-nav-btn" id="calNextBtn">›</button></div>
+          <div class="cal-grid" id="calGrid"></div>
+          <div class="cal-search-row"><input type="text" class="cal-search-input" id="calSearchInput" placeholder="جستجوی تاریخ (مثلاً ۱۴۰۳/۰۱/۱۵ )"><button class="cal-search-btn" id="calSearchBtn">جستجو</button></div>
+          <div class="cal-legend">
+            <span><span class="cal-legend-dot" style="background:#3F8F5C;"></span><span id="legendExcellent">عالی</span></span>
+            <span><span class="cal-legend-dot" style="background:#4F9A68;"></span><span id="legendGood">خوب</span></span>
+            <span><span class="cal-legend-dot" style="background:#E08A3C;"></span><span id="legendFair">متوسط</span></span>
+            <span><span class="cal-legend-dot" style="background:#D9684A;"></span><span id="legendCare">نیاز به مراقبت</span></span>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="card">
+          <div class="card-title" id="statsTitle">داشبورد آماری ماه</div>
+          <div class="card-subtitle" id="statsSubtitle">—</div>
+          <div class="stats-grid" id="statsGrid"></div>
+        </div>
+
+        <!-- History -->
+        <div class="card">
+          <div class="card-title" id="historyTitle">تاریخچه</div>
+          <div class="card-subtitle" id="historySub">روزهای ثبت‌شده، از جدید به قدیم — برای ویرایش روی ✎ بزن</div>
+          <div class="history-list" id="historyList"></div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-row">
+          <div class="backup-row"><button class="backup-btn" id="exportBtn">📤 <span id="exportText">خروجی پشتیبان (JSON)</span></button><button class="backup-btn" id="importBtn">📥 <span id="importText">بازیابی از فایل</span></button></div>
+          <input type="file" id="importFileInput" accept="application/json" style="display:none;">
+          <button class="reset-link" id="resetLink">پاک‌کردن همه داده‌ها</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- سازنده در انتهای صفحه، سمت چپ -->
+    <div style="text-align: left; margin-top: 28px; padding: 0 4px 10px; font-size: 12.5px; color: var(--c-ink-soft); font-weight: 600;">
+      <span id="appCreator">سازنده: سعید خراسانی</span>
+    </div>
+  </div>
+
+  <!-- Alarm Modal -->
+  <div class="modal-overlay" id="alarmModalOverlay">
+    <div class="modal-box">
+      <div class="modal-title" id="alarmModalTitle">⏰ مدیریت آلارم‌ها</div>
+      <div class="modal-text" id="alarmModalText">زمان‌هایی که می‌خوای بهت یادآوری بشه رو تنظیم کن.</div>
+      <div style="background:var(--c-linen); border-radius:var(--radius-sm); padding:16px; margin-bottom:16px; border:1px solid var(--c-line);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <span style="font-weight:700; font-size:14px;" id="alarmFormTitle">➕ آلارم جدید</span>
+          <button id="alarmFormCancelBtn" style="color:var(--c-ink-soft); font-size:14px;">✕</button>
+        </div>
+        <div class="alarm-form-row">
+          <label id="alarmTitleLabel">عنوان</label>
+          <input type="text" id="alarmTitleInput" placeholder="مثلاً: وقت دارو" maxlength="60">
+        </div>
+        <div class="alarm-form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div>
+            <label id="alarmTimeLabel">ساعت</label>
+            <input type="time" id="alarmTimeInput" step="60">
+          </div>
+          <div>
+            <label id="alarmDateLabel">تاریخ</label>
+            <input type="text" id="alarmDateInput" placeholder="مثلاً ۱۴۰۳/۰۱/۱۵" class="num-input">
+          </div>
+        </div>
+        <div class="alarm-form-row">
+          <label id="alarmRepeatLabel">تکرار</label>
+          <select class="repeat-select" id="alarmRepeatSelect">
+            <option value="once">یکبار</option>
+            <option value="daily">روزانه</option>
+            <option value="weekly">هفتگی</option>
+          </select>
+        </div>
+        <div class="alarm-form-row" id="alarmDaysRow" style="display:none;">
+          <label>روزهای هفته</label>
+          <div class="days-row" id="alarmDaysContainer">
+            <button class="day-btn" data-day="0">ش</button>
+            <button class="day-btn" data-day="1">ی</button>
+            <button class="day-btn" data-day="2">د</button>
+            <button class="day-btn" data-day="3">س</button>
+            <button class="day-btn" data-day="4">چ</button>
+            <button class="day-btn" data-day="5">پ</button>
+            <button class="day-btn" data-day="6">ج</button>
+          </div>
+        </div>
+        <div class="alarm-form-row">
+          <label id="alarmSoundLabel">نوع زنگ</label>
+          <select class="sound-select" id="alarmSoundSelect">
+            <option value="simple">🔔 ساده</option>
+            <option value="gentle">🎵 ملایم</option>
+            <option value="fast">⚡ تند</option>
+            <option value="alert">🚨 هشدار</option>
+            <option value="short">📢 کوتاه</option>
+          </select>
+          <button id="previewSoundBtn" style="margin-top:6px; background:var(--c-card); border:1px solid var(--c-line); border-radius:var(--radius-sm); padding:6px 14px; font-size:12px; font-weight:600; color:var(--c-ink-soft);">▶ پیش‌نمایش</button>
+        </div>
+        <button class="btn-primary" id="alarmSaveBtn" style="width:100%; padding:12px; border-radius:var(--radius-sm); font-weight:700;">ذخیره آلارم</button>
+      </div>
+      <div class="alarm-list-header">
+        <span style="font-weight:700;">📋 آلارم‌های فعال</span>
+        <span class="count" id="alarmCount">۰ عدد</span>
+      </div>
+      <div id="alarmListContainer">
+        <div class="empty-state"><span class="emoji">🔕</span><span id="alarmEmptyText">هیچ آلارمی تنظیم نشده.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ringing Overlay -->
+  <div class="modal-overlay" id="alarmRingingOverlay">
+    <div class="modal-box">
+      <div class="alarm-ring-icon">🔔</div>
+      <div class="alarm-ring-title" id="ringingTitle">⏰ زنگ آلارم!</div>
+      <div class="alarm-ring-details" id="ringingDetails">زمان فرا رسید</div>
+      <button class="dismiss-btn" id="dismissAlarmBtn">✋ قطع کردن زنگ</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <div class="modal-overlay" id="modalOverlay"><div class="modal-box"><div class="modal-title" id="modalTitle">حذف اطلاعات</div><p class="modal-text" id="modalText">این کار قابل بازگشت نیست.</p><div class="modal-actions"><button class="btn-cancel" id="modalCancel">انصراف</button><button class="btn-danger" id="modalConfirm">حذف</button></div></div></div>
+  <div class="modal-overlay" id="settingsModalOverlay"><div class="modal-box"><div class="modal-title" id="settingsModalTitle">تنظیمات و هدف‌گذاری</div><p class="modal-text" id="settingsModalText">این مقادیر برای محاسبه BMI و درصد تحقق اهداف روزانه استفاده می‌شن.</p>
+    <div class="settings-field"><label id="settingHeightLabel">قد (سانتی‌متر)</label><input type="number" class="num-input" id="settingHeight" min="100" max="230"></div>
+    <div class="settings-field"><label id="settingSleepGoalLabel">هدف خواب (ساعت)</label><input type="number" class="num-input" id="settingSleepGoal" min="4" max="12" step="0.5"></div>
+    <div class="settings-field"><label id="settingWaterGoalLabel">هدف آب (لیوان)</label><input type="number" class="num-input" id="settingWaterGoal" min="1" max="15"></div>
+    <div class="settings-field"><label id="settingExerciseGoalLabel">هدف ورزش (دقیقه)</label><input type="number" class="num-input" id="settingExerciseGoal" min="0" max="180"></div>
+    <div class="modal-actions"><button class="btn-cancel" id="settingsCancel">انصراف</button><button class="btn-danger" id="settingsSave" style="background:var(--c-sleep);">ذخیره</button></div>
+  </div></div>
+  <div class="modal-overlay profile-modal" id="profileModalOverlay"><div class="modal-box"><div class="modal-title" id="profileModalTitle">✎ ویرایش پروفایل</div><p class="modal-text" id="profileModalText">اطلاعات شخصی خودت رو به‌روز کن.</p>
+    <div class="settings-field"><label id="profileNameLabel">نام شما</label><input type="text" class="num-input" id="profileNameInput" placeholder="نام خود را وارد کنید"></div>
+    <div class="settings-field"><label id="profileAgeLabel">سن شما</label><input type="number" class="num-input" id="profileAgeInput" min="1" max="120" placeholder="مثلاً ۲۵"></div>
+    <div class="settings-field"><label id="profileHeightLabel">قد (سانتی‌متر)</label><input type="number" class="num-input" id="profileHeightInput" min="100" max="230" placeholder="مثلاً ۱۷۵"></div>
+    <div class="settings-field"><label id="profileWeightLabel">وزن (کیلوگرم)</label><input type="number" class="num-input" id="profileWeightInput" min="20" max="300" step="0.1" placeholder="مثلاً ۷۰"></div>
+    <div class="modal-actions"><button class="btn-cancel" id="profileCancel">انصراف</button><button class="btn-danger" id="profileSave" style="background:var(--c-sleep);">ذخیره</button></div>
+  </div></div>
+
+  <script>
+  (function(){
+    "use strict";
+
+    // ===== Utilities (same as before) =====
+    const FA_DIGITS = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+    function toFa(n){ return String(n).replace(/[0-9]/g, d => FA_DIGITS[d]); }
+    function clamp(v,min,max){ return Math.max(min, Math.min(max,v)); }
+    function getDateKey(date){ const y=date.getFullYear(), m=String(date.getMonth()+1).padStart(2,'0'), d=String(date.getDate()).padStart(2,'0'); return `${y}-${m}-${d}`; }
+    function parseDateKey(key){ const [y,m,d]=key.split('-').map(Number); return new Date(y, m-1, d); }
+    const jalaliFormatter = new Intl.DateTimeFormat('en-US-u-ca-persian', {year:'numeric', month:'numeric', day:'numeric'});
+    function gregorianToJalali(date){ const parts = jalaliFormatter.formatToParts(date); const get = (t)=> Number(parts.find(p=>p.type===t).value); return { jy: get('year'), jm: get('month'), jd: get('day') }; }
+    function formatJalali(date, opts){ try{ return new Intl.DateTimeFormat('fa-IR', Object.assign({calendar:'persian'}, opts)).format(date); }catch(e){ return date.toLocaleDateString('fa-IR'); } }
+    function formatEnglish(date, opts){ return date.toLocaleDateString('en-US', opts); }
+    function jalaliMonthInfo(jy, jm){ const guess = new Date(jy+621, 2, 21); guess.setDate(guess.getDate() + (jm-1)*30); let firstGregorian = null; for(let offset=-40; offset<=40; offset++){ const d = new Date(guess.getFullYear(), guess.getMonth(), guess.getDate()+offset); const j = gregorianToJalali(d); if(j.jy===jy && j.jm===jm && j.jd===1){ firstGregorian = d; break; } } if(!firstGregorian) return null; let daysInMonth = 0; let cursor = new Date(firstGregorian); while(true){ const j = gregorianToJalali(cursor); if(j.jy!==jy || j.jm!==jm) break; daysInMonth++; cursor = new Date(cursor.getFullYear(), cursor.getMonth(), cursor.getDate()+1); } return { firstGregorian, daysInMonth }; }
+    function parseJalaliDate(str){ const parts = str.split(/[-\/]/).map(Number); if(parts.length!==3) return null; let [jy, jm, jd] = parts; if(jy<1 || jm<1 || jm>12 || jd<1) return null; const info = jalaliMonthInfo(jy, jm); if(!info || jd>info.daysInMonth) return null; const d = new Date(info.firstGregorian); d.setDate(d.getDate() + jd - 1); return d; }
+    function polarToCartesian(cx, cy, r, angleDeg){ const rad = (angleDeg - 90) * Math.PI / 180; return { x: cx + r*Math.cos(rad), y: cy + r*Math.sin(rad) }; }
+    function describeArc(cx, cy, r, startAngle, endAngle){ const start = polarToCartesian(cx, cy, r, endAngle); const end = polarToCartesian(cx, cy, r, startAngle); const largeArcFlag = (endAngle-startAngle) <= 180 ? "0" : "1"; return ["M", start.x, start.y, "A", r, r, 0, largeArcFlag, 0, end.x, end.y].join(" "); }
+    const QUALITY_SCORES = [20,50,75,100];
+    const INTENSITY_SCORES = [10,45,75,100];
+    function computeScores(s){
+      const hoursScore = clamp(100 - Math.abs(s.sleepHours-8)*14, 0, 100);
+      const sleep = Math.round((hoursScore + QUALITY_SCORES[s.sleepQuality]) / 2);
+      const minutesScore = clamp(Math.round(s.exerciseMinutes/30*100), 0, 100);
+      const exercise = Math.round((minutesScore + INTENSITY_SCORES[s.exerciseIntensity]) / 2);
+      const waterScore = clamp(Math.round(s.waterGlasses/8*100), 0, 100);
+      const nutrition = Math.round((QUALITY_SCORES[s.nutritionQuality] + waterScore) / 2);
+      const total = Math.round((sleep+exercise+nutrition)/3);
+      return { sleep, exercise, nutrition, total };
+    }
+    function tierOf(total){ if(total>=85) return {label:'عالی', color:'var(--c-excellent)'}; if(total>=70) return {label:'خوب', color:'var(--c-good)'}; if(total>=50) return {label:'متوسط', color:'var(--c-fair)'}; return {label:'نیاز به مراقبت بیشتر', color:'var(--c-care)'}; }
+    function tierDot(total){ if(total>=85) return '#3F8F5C'; if(total>=70) return '#4F9A68'; if(total>=50) return '#E08A3C'; return '#D9684A'; }
+    function computeBmi(weightKg, heightCm){ if(!weightKg || !heightCm) return null; const h = heightCm/100; return weightKg / (h*h); }
+    function bmiLabel(bmi){ if(bmi<18.5) return 'کمبود وزن'; if(bmi<25) return 'طبیعی'; if(bmi<30) return 'اضافه وزن'; return 'چاقی'; }
+
+    // ===== Storage (with fallback for old keys) =====
+    const STORAGE_KEY = 'daily-entries';
+    const TODO_KEY = 'todo-tasks';
+    const SETTINGS_KEY = 'app-settings';
+    const THEME_KEY = 'app-theme';
+    const LANG_KEY = 'app-lang';
+    const USER_KEY = 'user-profile';
+    const ALARMS_KEY = 'alarms';
+    const hasClaudeStorage = !!(window.storage && typeof window.storage.get === 'function' && typeof window.storage.set === 'function');
+
+    async function storageGet(key){
+      if(hasClaudeStorage){
+        try{ const res = await window.storage.get(key, false); return (res && res.value!=null) ? res.value : null; }catch(e){ return null; }
+      }
+      try{ return localStorage.getItem(key); }catch(e){ return null; }
+    }
+    async function storageSet(key, value){
+      if(hasClaudeStorage){
+        try{ const res = await window.storage.set(key, value, false); return !!res; }catch(e){ console.error('storage error', e); return false; }
+      }
+      try{ localStorage.setItem(key, value); return true; }catch(e){ console.error('storage error', e); return false; }
+    }
+
+    // Load entries with fallback to old keys
+    async function loadAllEntries(){
+      let data = null;
+      let v = await storageGet(STORAGE_KEY);
+      if(v) data = v;
+      else {
+        const oldKeys = ['entries', 'dailyEntries', 'health-entries'];
+        for (let k of oldKeys) {
+          let old = await storageGet(k);
+          if(old) {
+            data = old;
+            await storageSet(STORAGE_KEY, old);
+            try { if(!hasClaudeStorage) localStorage.removeItem(k); } catch(e) {}
+            break;
+          }
+        }
+      }
+      try{ return data ? JSON.parse(data) : {}; }catch(e){ return {}; }
+    }
+
+    async function persistEntries(obj){ return await storageSet(STORAGE_KEY, JSON.stringify(obj)); }
+    async function loadTodos(){ const v = await storageGet(TODO_KEY); try{ return v ? JSON.parse(v) : []; }catch(e){ return []; } }
+    async function persistTodos(){ return await storageSet(TODO_KEY, JSON.stringify(todos)); }
+    async function loadSettings(){ const v = await storageGet(SETTINGS_KEY); try{ return v ? Object.assign({}, DEFAULT_SETTINGS, JSON.parse(v)) : Object.assign({}, DEFAULT_SETTINGS); }catch(e){ return Object.assign({}, DEFAULT_SETTINGS); } }
+    async function persistSettings(){ return await storageSet(SETTINGS_KEY, JSON.stringify(settings)); }
+    async function loadUser(){ const v = await storageGet(USER_KEY); try{ return v ? JSON.parse(v) : null; }catch(e){ return null; } }
+    async function persistUser(data){ return await storageSet(USER_KEY, JSON.stringify(data)); }
+    async function loadAlarms(){ const v = await storageGet(ALARMS_KEY); try{ return v ? JSON.parse(v) : []; }catch(e){ return []; } }
+    async function persistAlarms(){ return await storageSet(ALARMS_KEY, JSON.stringify(alarms)); }
+
+    function loadTheme(){ try{ return localStorage.getItem(THEME_KEY) || 'light'; }catch(e){ return 'light'; } }
+    function saveTheme(t){ try{ localStorage.setItem(THEME_KEY, t); }catch(e){} }
+    function loadLang(){ try{ return localStorage.getItem(LANG_KEY) || 'fa'; }catch(e){ return 'fa'; } }
+    function saveLang(l){ try{ localStorage.setItem(LANG_KEY, l); }catch(e){} }
+
+    // ===== State =====
+    let entries = {}; let todos = [];
+    const TODAY = new Date(); const todayKey = getDateKey(TODAY);
+    const DEFAULT_STATE = { sleepHours:0, sleepQuality:0, exerciseMinutes:0, exerciseIntensity:0, nutritionQuality:0, waterGlasses:0, weight:null, bpSystolic:null, bpDiastolic:null, pulse:null, mood:null, steps:0 };
+    const DEFAULT_SETTINGS = { height:175, sleepGoal:8, waterGoal:8, exerciseGoal:45 };
+    let settings = Object.assign({}, DEFAULT_SETTINGS);
+    let state = Object.assign({}, DEFAULT_STATE);
+    let savedSnapshot = null; let editingKey = todayKey; let currentLang = 'fa'; let saveTimeout = null; let userProfile = null;
+    let alarms = [];
+    let editingAlarmId = null;
+    let alarmCheckInterval = null;
+    let activeRingingAlarm = null;
+    let activeSound = null;
+
+    const SOUND_TYPES = {
+      simple: { label: 'ساده', icon: '🔔', freq: 880, duration: 400, gap: 1100, pattern: 'single' },
+      gentle: { label: 'ملایم', icon: '🎵', freq: 550, duration: 600, gap: 1400, pattern: 'single' },
+      fast: { label: 'تند', icon: '⚡', freq: 1000, duration: 200, gap: 300, pattern: 'single' },
+      alert: { label: 'هشدار', icon: '🚨', freq: [800, 1200], duration: 300, gap: 500, pattern: 'alternate' },
+      short: { label: 'کوتاه', icon: '📢', freq: 1400, duration: 150, gap: 800, pattern: 'single' }
+    };
+    function getSoundLabel(type) { return SOUND_TYPES[type]?.label || 'ساده'; }
+    function getSoundIcon(type) { return SOUND_TYPES[type]?.icon || '🔔'; }
+
+    // ===== Translations (with updated date labels) =====
+    const translations = {
+      fa: {
+        appTitle: 'روزنگار سلامتی دانش‌آموز', appSub: 'خواب، ورزش و تغذیه‌ی هر روزت', scoreLabel: 'امتیاز امروز',
+        appCreator: 'سازنده: سعید خراسانی',
+        sleepTitle: 'خواب', sleepHoursLabel: 'ساعت خواب شب گذشته', sleepQualityLabel: 'کیفیت خواب',
+        sleepBad: 'ضعیف', sleepMed: 'متوسط', sleepGood: 'خوب', sleepExcel: 'عالی',
+        nutritionTitle: 'تغذیه', nutritionQualityLabel: 'کیفیت تغذیه امروز',
+        nutritionBad: 'ضعیف', nutritionMed: 'متوسط', nutritionGood: 'خوب', nutritionExcel: 'عالی',
+        waterLabel: 'آب مصرفی',
+        exerciseTitle: 'ورزش', exerciseMinutesLabel: 'مدت فعالیت بدنی امروز', intensityLabel: 'شدت فعالیت',
+        intensityRest: 'استراحت', intensityLight: 'سبک', intensityMod: 'متوسط', intensityHard: 'شدید',
+        stepsTitle: 'گام‌شمار', optionalTag: 'اختیاری', stepsLabel: 'تعداد قدم‌های امروز', stepsAuto: '⏳ در حال دریافت گام‌ها...',
+        healthTitle: 'سلامت تکمیلی', moodLabel: 'خلق و خو', weightLabel: 'وزن (کیلوگرم)', bpSystolicLabel: 'فشار سیستول', bpDiastolicLabel: 'فشار دیاستول', pulseLabel: 'نبض (ضربان در دقیقه)',
+        goalsTitle: 'اهداف امروز', goalsSub: 'پیشرفت نسبت به اهدافی که تنظیم کردی',
+        goalSleep: 'خواب', goalWater: 'آب', goalExercise: 'ورزش',
+        analysisTitle: 'تحلیل هوشمند روز', analysisSub: 'بر اساس امتیاز ثبت‌شده‌ی این روز', analysisEmpty: 'بعد از ثبت امتیاز، تحلیل اینجا نمایش داده می‌شه.',
+        tipsTitle: '💡 راهکارهای سلامتی', tipsSub: 'نکات کاربردی با انیمیشن برای هر روز',
+        todoTitle: 'کارهای مهم', todoSub: 'کارهایی که می‌خوای امروز انجام بدی',
+        chartTitle: 'روند روزهای اخیر', chartSub: 'آخرین ۱۴ روزی که امتیاز ثبت کردی',
+        legendExcellent: 'عالی', legendGood: 'خوب', legendFair: 'متوسط', legendCare: 'نیاز به مراقبت',
+        statsTitle: 'داشبورد آماری ماه', historyTitle: 'تاریخچه', historySub: 'روزهای ثبت‌شده، از جدید به قدیم — برای ویرایش روی ✎ بزن',
+        exportText: 'خروجی پشتیبان (JSON)', importText: 'بازیابی از فایل', resetText: 'پاک‌کردن همه داده‌ها',
+        saveBtn: 'ثبت امتیاز امروز', saveUpdate: 'به‌روزرسانی امتیاز امروز', saveEdit: 'ذخیره تغییرات این روز', saveDay: 'ثبت این روز',
+        editingPrefix: 'در حال ویرایش روز', cancelEdit: 'انصراف',
+        installTitle: 'روزنگار سلامتی دانش‌آموز رو نصب کن', installSub: 'دسترسی سریع از صفحه اصلی گوشی، حتی بدون اینترنت', installBtn: 'نصب',
+        modalTitle: 'حذف اطلاعات', modalText: 'این کار قابل بازگشت نیست.', modalCancel: 'انصراف', modalConfirm: 'حذف',
+        settingsTitle: 'تنظیمات و هدف‌گذاری', settingsText: 'این مقادیر برای محاسبه BMI و درصد تحقق اهداف روزانه استفاده می‌شن.',
+        settingHeight: 'قد (سانتی‌متر)', settingSleepGoal: 'هدف خواب (ساعت)', settingWaterGoal: 'هدف آب (لیوان)', settingExerciseGoal: 'هدف ورزش (دقیقه)',
+        settingsSave: 'ذخیره', settingsCancel: 'انصراف',
+        searchPlaceholder: 'جستجوی تاریخ (مثلاً ۱۴۰۳/۰۱/۱۵ یا 2024/03/15)', searchBtn: 'جستجو',
+        today: 'امروز', saved: 'ذخیره شد ✅',
+        stepsActive: '🚶 در حال شمارش...', stepsDone: '✅ گام‌ها به‌روز می‌شوند', stepsUnsupported: '❌ گام‌شمار پشتیبانی نمی‌شود',
+        guest: 'مهمان', saving: 'در حال ذخیره...',
+        profileTitle: '✎ ویرایش پروفایل', profileText: 'اطلاعات شخصی خودت رو به‌روز کن.',
+        profileName: 'نام شما', profileAge: 'سن شما', profileHeight: 'قد (سانتی‌متر)', profileWeight: 'وزن (کیلوگرم)',
+        profileSave: 'ذخیره', profileCancel: 'انصراف',
+        voiceHint: 'برای ورود صوتی کلیک کن و به فارسی بگو: «خواب ۸ ساعت، آب ۶ لیوان، ورزش ۳۰ دقیقه، تغذیه خوب»',
+        voiceListening: '🎙️ گوش می‌کنم... (فارسی)',
+        voiceSuccess: '✅ اطلاعات از روی صدا دریافت شد.',
+        voiceError: '❌ متوجه نشدم، دوباره سعی کن.',
+        voiceUnsupported: 'مرورگر از ورود صوتی پشتیبانی نمی‌کند.',
+        voiceIntro: 'سلام! لطفاً اطلاعات امروزت رو به فارسی بگو: خواب چند ساعت، آب چند لیوان، ورزش چند دقیقه و کیفیت تغذیه (ضعیف، متوسط، خوب، عالی).',
+        voiceConfirm: 'اطلاعات ثبت شد.',
+        voicePermissionDenied: 'دسترسی به میکروفون داده نشد. لطفاً در تنظیمات مرورگر مجوز را فعال کنید.',
+        voiceNoMatch: 'متن تشخیص داده شد:',
+        voiceSamples: '📢 نمونه‌ها: «خواب ۸ ساعت، آب ۶ لیوان، ورزش ۳۰ دقیقه، تغذیه خوب»',
+        voiceDetectedSleep: 'خواب', voiceDetectedWater: 'آب', voiceDetectedExercise: 'ورزش', voiceDetectedQuality: 'کیفیت تغذیه',
+        voiceRequiresInternet: 'تشخیص صدا نیاز به اتصال اینترنت دارد (برای پردازش در سرور)',
+        alarmTitle: '⏰ مدیریت آلارم‌ها',
+        alarmSub: 'زمان‌هایی که می‌خوای بهت یادآوری بشه رو تنظیم کن.',
+        alarmNew: '➕ آلارم جدید',
+        alarmTitleLabel: 'عنوان',
+        alarmTimeLabel: 'ساعت',
+        alarmDateLabel: 'تاریخ (مثلاً ۱۴۰۳/۰۱/۱۵)',
+        alarmRepeatLabel: 'تکرار',
+        alarmOnce: 'یکبار',
+        alarmDaily: 'روزانه',
+        alarmWeekly: 'هفتگی',
+        alarmSoundLabel: 'نوع زنگ',
+        alarmSave: 'ذخیره آلارم',
+        alarmCancel: 'انصراف',
+        alarmEmpty: 'هیچ آلارمی تنظیم نشده.',
+        alarmCount: 'عدد',
+        alarmActive: 'فعال',
+        alarmInactive: 'غیرفعال',
+        alarmDelete: 'حذف',
+        alarmEdit: 'ویرایش',
+        alarmToggle: 'تغییر وضعیت',
+        alarmNotificationTitle: '⏰ یادآوری: {title}',
+        alarmNotificationBody: 'زمان {time} فرا رسید!',
+        alarmDeleted: 'آلارم حذف شد',
+        alarmSaved: 'آلارم ذخیره شد',
+        alarmUpdated: 'آلارم به‌روز شد',
+        alarmTriggered: '⏰ آلارم! {title}',
+        alarmRinging: '⏰ زنگ آلارم!',
+        alarmDismiss: '✋ قطع کردن زنگ',
+        alarmDismissed: 'آلارم قطع شد',
+        alarmDatePlaceholder: 'مثلاً ۱۴۰۳/۰۱/۱۵',
+        alarmDateFormat: 'YYYY/MM/DD',
+      },
+      en: {
+        appTitle: 'Student Health Diary', appSub: 'Sleep, Exercise & Nutrition Daily', scoreLabel: "Today's Score",
+        appCreator: 'Creator: Saeed Khorasani',
+        sleepTitle: 'Sleep', sleepHoursLabel: 'Hours of sleep last night', sleepQualityLabel: 'Sleep Quality',
+        sleepBad: 'Poor', sleepMed: 'Fair', sleepGood: 'Good', sleepExcel: 'Excellent',
+        nutritionTitle: 'Nutrition', nutritionQualityLabel: "Today's Nutrition Quality",
+        nutritionBad: 'Poor', nutritionMed: 'Fair', nutritionGood: 'Good', nutritionExcel: 'Excellent',
+        waterLabel: 'Water Intake',
+        exerciseTitle: 'Exercise', exerciseMinutesLabel: "Today's Activity Duration", intensityLabel: 'Intensity',
+        intensityRest: 'Rest', intensityLight: 'Light', intensityMod: 'Moderate', intensityHard: 'Intense',
+        stepsTitle: 'Step Counter', optionalTag: 'Optional', stepsLabel: "Today's Steps", stepsAuto: '⏳ Getting steps...',
+        healthTitle: 'Health Extra', moodLabel: 'Mood', weightLabel: 'Weight (kg)', bpSystolicLabel: 'Systolic BP', bpDiastolicLabel: 'Diastolic BP', pulseLabel: 'Pulse (bpm)',
+        goalsTitle: "Today's Goals", goalsSub: 'Progress toward your goals',
+        goalSleep: 'Sleep', goalWater: 'Water', goalExercise: 'Exercise',
+        analysisTitle: "Today's Analysis", analysisSub: 'Based on today\'s recorded score', analysisEmpty: 'After saving your score, analysis will appear here.',
+        tipsTitle: '💡 Health Tips', tipsSub: 'Animated practical tips for every day',
+        todoTitle: 'Tasks', todoSub: 'Things you want to do today',
+        chartTitle: 'Recent Trend', chartSub: 'Last 14 days with scores',
+        legendExcellent: 'Excellent', legendGood: 'Good', legendFair: 'Fair', legendCare: 'Needs Care',
+        statsTitle: 'Monthly Stats', historyTitle: 'History', historySub: 'Recorded days, newest first — click ✎ to edit',
+        exportText: 'Backup Export (JSON)', importText: 'Restore from File', resetText: 'Clear All Data',
+        saveBtn: "Save Today's Score", saveUpdate: "Update Today's Score", saveEdit: 'Save Changes', saveDay: 'Save This Day',
+        editingPrefix: 'Editing', cancelEdit: 'Cancel',
+        installTitle: 'Install Student Health Diary', installSub: 'Quick access from home screen, even offline', installBtn: 'Install',
+        modalTitle: 'Delete Data', modalText: 'This action cannot be undone.', modalCancel: 'Cancel', modalConfirm: 'Delete',
+        settingsTitle: 'Settings & Goals', settingsText: 'These values are used for BMI calculation and daily goal tracking.',
+        settingHeight: 'Height (cm)', settingSleepGoal: 'Sleep Goal (hours)', settingWaterGoal: 'Water Goal (glasses)', settingExerciseGoal: 'Exercise Goal (minutes)',
+        settingsSave: 'Save', settingsCancel: 'Cancel',
+        searchPlaceholder: 'Search date (e.g. 1403/01/15 or 2024/03/15)', searchBtn: 'Search',
+        today: 'Today', saved: 'Saved ✅',
+        stepsActive: '🚶 Counting...', stepsDone: '✅ Steps updating', stepsUnsupported: '❌ Step counter not supported',
+        guest: 'Guest', saving: 'Saving...',
+        profileTitle: '✎ Edit Profile', profileText: 'Update your personal info.',
+        profileName: 'Your Name', profileAge: 'Your Age', profileHeight: 'Height (cm)', profileWeight: 'Weight (kg)',
+        profileSave: 'Save', profileCancel: 'Cancel',
+        voiceHint: 'Click to speak in Persian (e.g., "خواب ۸ ساعت، آب ۶ لیوان، ورزش ۳۰ دقیقه")',
+        voiceListening: '🎙️ Listening... (Persian)',
+        voiceSuccess: '✅ Voice input processed.',
+        voiceError: '❌ Could not understand, try again.',
+        voiceUnsupported: 'Voice input not supported in this browser.',
+        voiceIntro: 'Hello! Please speak in Persian: sleep hours, water glasses, exercise minutes, and nutrition quality.',
+        voiceConfirm: 'Info saved.',
+        voicePermissionDenied: 'Microphone access denied. Please enable it in browser settings.',
+        voiceNoMatch: 'Heard:',
+        voiceSamples: '📢 Samples: "sleep 8 hours, water 6 glasses, exercise 30 minutes, nutrition good"',
+        voiceDetectedSleep: 'Sleep', voiceDetectedWater: 'Water', voiceDetectedExercise: 'Exercise', voiceDetectedQuality: 'Nutrition',
+        voiceRequiresInternet: 'Voice recognition requires internet (server-side processing)',
+        alarmTitle: '⏰ Alarm Manager',
+        alarmSub: 'Set reminders for your daily tasks.',
+        alarmNew: '➕ New Alarm',
+        alarmTitleLabel: 'Title',
+        alarmTimeLabel: 'Time',
+        alarmDateLabel: 'Date (e.g. 2024/03/15)',
+        alarmRepeatLabel: 'Repeat',
+        alarmOnce: 'Once',
+        alarmDaily: 'Daily',
+        alarmWeekly: 'Weekly',
+        alarmSoundLabel: 'Sound type',
+        alarmSave: 'Save Alarm',
+        alarmCancel: 'Cancel',
+        alarmEmpty: 'No alarms set.',
+        alarmCount: 'items',
+        alarmActive: 'Active',
+        alarmInactive: 'Inactive',
+        alarmDelete: 'Delete',
+        alarmEdit: 'Edit',
+        alarmToggle: 'Toggle',
+        alarmNotificationTitle: '⏰ Reminder: {title}',
+        alarmNotificationBody: 'Time {time} has come!',
+        alarmDeleted: 'Alarm deleted',
+        alarmSaved: 'Alarm saved',
+        alarmUpdated: 'Alarm updated',
+        alarmTriggered: '⏰ Alarm! {title}',
+        alarmRinging: '⏰ Alarm ringing!',
+        alarmDismiss: '✋ Dismiss alarm',
+        alarmDismissed: 'Alarm dismissed',
+        alarmDatePlaceholder: 'e.g. 2024/03/15',
+        alarmDateFormat: 'YYYY/MM/DD',
+      }
+    };
+    function t(key) { return translations[currentLang]?.[key] || translations.fa[key] || key; }
+
+    // ===== Sound engine =====
+    function playSoundOnce(soundType, duration) {
+      const type = soundType || 'simple';
+      const config = SOUND_TYPES[type] || SOUND_TYPES.simple;
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        const freq = Array.isArray(config.freq) ? config.freq[0] : config.freq;
+        osc.frequency.value = freq;
+        osc.type = 'square';
+        gain.gain.value = 0.4;
+        osc.start();
+        setTimeout(() => { try { osc.stop(); audioCtx.close(); } catch(e) {} }, duration || config.duration || 400);
+      } catch(e) {}
+    }
+
+    function startAlarmSound(soundType) {
+      const type = soundType || 'simple';
+      const config = SOUND_TYPES[type] || SOUND_TYPES.simple;
+      let isPlaying = true;
+      let intervalId = null;
+
+      function beep() {
+        if (!isPlaying) return;
+        try {
+          const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          if (Array.isArray(config.freq)) {
+            const idx = Math.floor(Date.now() / 500) % 2;
+            osc.frequency.value = config.freq[idx];
+          } else {
+            osc.frequency.value = config.freq;
+          }
+          osc.type = 'square';
+          gain.gain.value = 0.4;
+          osc.start();
+          setTimeout(() => { try { osc.stop(); audioCtx.close(); } catch(e) {} }, config.duration);
+        } catch(e) {}
+      }
+
+      beep();
+      intervalId = setInterval(() => { if (isPlaying) beep(); else { clearInterval(intervalId); intervalId = null; } }, config.duration + config.gap);
+
+      if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 200]);
+
+      const timeoutId = setTimeout(() => {
+        if (isPlaying) {
+          isPlaying = false;
+          if (intervalId) clearInterval(intervalId);
+          dismissAlarm();
+        }
+      }, 30000);
+
+      return { intervalId, timeoutId, stop: function() {
+        isPlaying = false;
+        if (this.intervalId) clearInterval(this.intervalId);
+        if (this.timeoutId) clearTimeout(this.timeoutId);
+        if (navigator.vibrate) navigator.vibrate(0);
+      } };
+    }
+
+    function triggerAlarm(alarm) {
+      if (activeRingingAlarm) return;
+      const overlay = document.getElementById('alarmRingingOverlay');
+      document.getElementById('ringingTitle').textContent = t('alarmRinging');
+      document.getElementById('ringingDetails').textContent = alarm.title + ' - ' + formatAlarmTime(alarm.time);
+      overlay.classList.add('visible');
+      activeRingingAlarm = alarm;
+      activeSound = startAlarmSound(alarm.sound || 'simple');
+
+      const title = t('alarmNotificationTitle').replace('{title}', alarm.title || '');
+      const body = t('alarmNotificationBody').replace('{time}', formatAlarmTime(alarm.time));
+      if ('Notification' in window && Notification.permission === 'granted') {
+        new Notification(title, { body, icon: './icon-192.png' });
+      }
+      showToast('🔔 ' + t('alarmTriggered').replace('{title}', alarm.title || ''));
+      if (alarm.repeat === 'once') {
+        alarm.active = false;
+        persistAlarms();
+        renderAlarms();
+        updateAlarmBadge();
+      }
+    }
+
+    function dismissAlarm() {
+      if (activeSound) { activeSound.stop(); activeSound = null; }
+      const overlay = document.getElementById('alarmRingingOverlay');
+      overlay.classList.remove('visible');
+      showToast(t('alarmDismissed'));
+      activeRingingAlarm = null;
+      if (navigator.vibrate) navigator.vibrate(0);
+    }
+
+    document.getElementById('dismissAlarmBtn').addEventListener('click', dismissAlarm);
+    document.getElementById('alarmRingingOverlay').addEventListener('click', function(e) { if (e.target === this) dismissAlarm(); });
+    document.getElementById('previewSoundBtn').addEventListener('click', function() {
+      const soundType = document.getElementById('alarmSoundSelect').value;
+      if (window._previewTimer) clearTimeout(window._previewTimer);
+      playSoundOnce(soundType, 600);
+      window._previewTimer = setTimeout(() => { playSoundOnce(soundType, 400); }, 500);
+    });
+
+    // ===== Alarm CRUD with Jalali/Miladi date support =====
+    function formatAlarmTime(timeStr) { const [h, m] = timeStr.split(':').map(Number); return h + ':' + String(m).padStart(2, '0'); }
+    function getDaysText(days, lang) { if (!days || days.length === 0) return ''; const names = lang === 'fa' ? ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'] : ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']; return days.map(d => names[d]).join(' '); }
+    function getRepeatLabel(repeat, lang) { if (repeat === 'daily') return lang === 'fa' ? 'روزانه' : 'Daily'; if (repeat === 'weekly') return lang === 'fa' ? 'هفتگی' : 'Weekly'; return lang === 'fa' ? 'یکبار' : 'Once'; }
+
+    // Convert date string from user input to ISO (YYYY-MM-DD) for storage
+    function parseUserDate(str, lang) {
+      if (!str) return null;
+      // If lang is fa, try Jalali first
+      if (lang === 'fa') {
+        const d = parseJalaliDate(str);
+        if (d) return getDateKey(d);
+      }
+      // Try English format: YYYY/MM/DD or YYYY-MM-DD
+      const parts = str.split(/[-\/]/).map(Number);
+      if (parts.length === 3) {
+        const [y, m, day] = parts;
+        if (y > 0 && m >= 1 && m <= 12 && day >= 1 && day <= 31) {
+          const d = new Date(y, m-1, day);
+          if (!isNaN(d.getTime())) return getDateKey(d);
+        }
+      }
+      return null;
+    }
+
+    function updateAlarmBadge() {
+      const active = alarms.filter(a => a.active).length;
+      const badge = document.getElementById('alarmBadge');
+      if (badge) { badge.textContent = active; badge.style.display = active > 0 ? 'inline' : 'none'; }
+    }
+
+    function renderAlarms() {
+      const container = document.getElementById('alarmListContainer');
+      const countEl = document.getElementById('alarmCount');
+      if (!container) return;
+      if (alarms.length === 0) {
+        container.innerHTML = '<div class="empty-state"><span class="emoji">🔕</span><span id="alarmEmptyText">' + t('alarmEmpty') + '</span></div>';
+        if (countEl) countEl.textContent = '0 ' + t('alarmCount');
+        updateAlarmBadge(); return;
+      }
+      const sorted = [...alarms].sort((a, b) => a.time.localeCompare(b.time));
+      let html = '';
+      sorted.forEach(alarm => {
+        const isActive = alarm.active;
+        const icon = alarm.repeat === 'daily' ? '🔁' : alarm.repeat === 'weekly' ? '📅' : '⏰';
+        const repeatLabel = getRepeatLabel(alarm.repeat, currentLang);
+        let details = repeatLabel;
+        if (alarm.repeat === 'weekly' && alarm.days && alarm.days.length > 0) details += ' • ' + getDaysText(alarm.days, currentLang);
+        if (alarm.date && alarm.repeat === 'once') {
+          const d = parseDateKey(alarm.date);
+          if (!isNaN(d.getTime())) {
+            const dateStr = currentLang === 'fa' ? formatJalali(d, {day:'numeric', month:'short', year:'numeric'}) : formatEnglish(d, {day:'numeric', month:'short', year:'numeric'});
+            details += ' • ' + dateStr;
+          }
+        }
+        const soundIcon = getSoundIcon(alarm.sound || 'simple');
+        const soundLabel = getSoundLabel(alarm.sound || 'simple');
+        html += `
+          <div class="alarm-card ${isActive ? '' : 'disabled'}">
+            <div class="alarm-icon">${icon}</div>
+            <div class="alarm-info">
+              <div class="alarm-title">${alarm.title || (currentLang === 'fa' ? 'بدون عنوان' : 'Untitled')}</div>
+              <div class="alarm-time">${formatAlarmTime(alarm.time)}</div>
+              <div class="alarm-details">${details} • ${soundIcon} ${soundLabel}</div>
+            </div>
+            <div class="alarm-actions">
+              <button class="toggle-btn ${isActive ? 'active' : 'inactive'}" data-id="${alarm.id}" title="${t('alarmToggle')}">${isActive ? '🔔' : '🔕'}</button>
+              <button class="edit-btn" data-id="${alarm.id}" title="${t('alarmEdit')}">✎</button>
+              <button class="delete-btn" data-id="${alarm.id}" title="${t('alarmDelete')}">✕</button>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+      if (countEl) countEl.textContent = alarms.length + ' ' + t('alarmCount');
+
+      container.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.id;
+          const alarm = alarms.find(a => a.id === id);
+          if (alarm) {
+            alarm.active = !alarm.active;
+            persistAlarms();
+            renderAlarms();
+            updateAlarmBadge();
+            showToast(alarm.active ? (currentLang === 'fa' ? 'آلارم فعال شد' : 'Alarm activated') : (currentLang === 'fa' ? 'آلارم غیرفعال شد' : 'Alarm deactivated'));
+          }
+        });
+      });
+      container.querySelectorAll('.edit-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.id;
+          const alarm = alarms.find(a => a.id === id);
+          if (alarm) openAlarmForm(alarm);
+        });
+      });
+      container.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.id;
+          openConfirm(t('modalTitle'), t('alarmDeleted') + '؟', async () => {
+            alarms = alarms.filter(a => a.id !== id);
+            await persistAlarms();
+            renderAlarms();
+            updateAlarmBadge();
+            showToast(t('alarmDeleted'));
+          });
+        });
+      });
+      updateAlarmBadge();
+    }
+
+    function openAlarmForm(alarm) {
+      const overlay = document.getElementById('alarmModalOverlay');
+      if (!overlay) return;
+      const titleInput = document.getElementById('alarmTitleInput');
+      const timeInput = document.getElementById('alarmTimeInput');
+      const dateInput = document.getElementById('alarmDateInput');
+      const repeatSelect = document.getElementById('alarmRepeatSelect');
+      const daysContainer = document.getElementById('alarmDaysContainer');
+      const daysRow = document.getElementById('alarmDaysRow');
+      const soundSelect = document.getElementById('alarmSoundSelect');
+      const saveBtn = document.getElementById('alarmSaveBtn');
+      const formTitle = document.getElementById('alarmFormTitle');
+
+      // Set placeholder and label based on language
+      dateInput.placeholder = t('alarmDatePlaceholder');
+
+      if (alarm) {
+        editingAlarmId = alarm.id;
+        formTitle.textContent = '✎ ' + (currentLang === 'fa' ? 'ویرایش آلارم' : 'Edit Alarm');
+        titleInput.value = alarm.title || '';
+        timeInput.value = alarm.time || '08:00';
+        // Display date in appropriate format
+        if (alarm.date) {
+          const d = parseDateKey(alarm.date);
+          if (!isNaN(d.getTime())) {
+            dateInput.value = currentLang === 'fa' ? formatJalali(d, {year:'numeric', month:'numeric', day:'numeric'}).replace(/\//g, '/') : formatEnglish(d, {year:'numeric', month:'numeric', day:'numeric'}).replace(/\//g, '/');
+          } else {
+            dateInput.value = '';
+          }
+        } else {
+          dateInput.value = '';
+        }
+        repeatSelect.value = alarm.repeat || 'once';
+        soundSelect.value = alarm.sound || 'simple';
+        daysContainer.querySelectorAll('.day-btn').forEach(btn => {
+          const day = parseInt(btn.dataset.day);
+          btn.classList.toggle('active', alarm.days && alarm.days.includes(day));
+        });
+        saveBtn.textContent = currentLang === 'fa' ? 'به‌روزرسانی' : 'Update';
+      } else {
+        editingAlarmId = null;
+        formTitle.textContent = t('alarmNew');
+        titleInput.value = '';
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const mins = String(now.getMinutes()).padStart(2, '0');
+        timeInput.value = hours + ':' + mins;
+        dateInput.value = '';
+        repeatSelect.value = 'once';
+        soundSelect.value = 'simple';
+        daysContainer.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
+        saveBtn.textContent = t('alarmSave');
+      }
+      daysRow.style.display = repeatSelect.value === 'weekly' ? 'block' : 'none';
+      overlay.classList.add('visible');
+    }
+
+    function closeAlarmForm() { document.getElementById('alarmModalOverlay').classList.remove('visible'); editingAlarmId = null; }
+
+    document.getElementById('alarmToggleBtn').addEventListener('click', () => { document.getElementById('alarmModalOverlay').classList.add('visible'); renderAlarms(); });
+    document.getElementById('alarmFormCancelBtn').addEventListener('click', closeAlarmForm);
+    document.getElementById('alarmRepeatSelect').addEventListener('change', function() {
+      document.getElementById('alarmDaysRow').style.display = this.value === 'weekly' ? 'block' : 'none';
+    });
+    document.getElementById('alarmDaysContainer').addEventListener('click', function(e) {
+      const btn = e.target.closest('.day-btn');
+      if (!btn) return;
+      btn.classList.toggle('active');
+    });
+    document.getElementById('alarmSaveBtn').addEventListener('click', async function() {
+      const title = document.getElementById('alarmTitleInput').value.trim() || (currentLang === 'fa' ? 'بدون عنوان' : 'Untitled');
+      const time = document.getElementById('alarmTimeInput').value;
+      let dateStr = document.getElementById('alarmDateInput').value.trim() || null;
+      const repeat = document.getElementById('alarmRepeatSelect').value;
+      const sound = document.getElementById('alarmSoundSelect').value;
+      const days = [];
+      document.getElementById('alarmDaysContainer').querySelectorAll('.day-btn.active').forEach(btn => days.push(parseInt(btn.dataset.day)));
+
+      if (!time) { showToast(currentLang === 'fa' ? 'لطفاً ساعت را انتخاب کنید.' : 'Please select a time.'); return; }
+      if (repeat === 'weekly' && days.length === 0) { showToast(currentLang === 'fa' ? 'لطفاً حداقل یک روز را انتخاب کنید.' : 'Please select at least one day.'); return; }
+
+      // Parse date if provided
+      let isoDate = null;
+      if (dateStr) {
+        isoDate = parseUserDate(dateStr, currentLang);
+        if (!isoDate) {
+          showToast(currentLang === 'fa' ? 'تاریخ نامعتبر. فرمت صحیح: ' + t('alarmDateFormat') : 'Invalid date format. Expected: ' + t('alarmDateFormat'));
+          return;
+        }
+      }
+
+      const alarmData = {
+        id: editingAlarmId || 'alarm_' + Date.now() + '_' + Math.random().toString(36).slice(2,6),
+        title, time,
+        date: (repeat === 'once' && isoDate) ? isoDate : null,
+        repeat,
+        days: repeat === 'weekly' ? days : [],
+        sound: sound || 'simple',
+        active: true,
+        createdAt: new Date().toISOString()
+      };
+
+      if (editingAlarmId) {
+        const idx = alarms.findIndex(a => a.id === editingAlarmId);
+        if (idx !== -1) alarms[idx] = { ...alarms[idx], ...alarmData };
+        showToast(t('alarmUpdated'));
+      } else { alarms.push(alarmData); showToast(t('alarmSaved')); }
+      await persistAlarms();
+      renderAlarms(); updateAlarmBadge(); closeAlarmForm();
+    });
+    document.getElementById('alarmModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeAlarmForm(); });
+
+    function checkAlarms() {
+      if (activeRingingAlarm) return;
+      const now = new Date();
+      const currentTime = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+      const currentDay = now.getDay();
+      const todayStr = getDateKey(now);
+      alarms.forEach(alarm => {
+        if (!alarm.active) return;
+        if (alarm.time !== currentTime) return;
+        let shouldTrigger = false;
+        if (alarm.repeat === 'once') {
+          if (alarm.date) {
+            if (alarm.date === todayStr) shouldTrigger = true;
+          } else shouldTrigger = true;
+        } else if (alarm.repeat === 'daily') shouldTrigger = true;
+        else if (alarm.repeat === 'weekly') {
+          if (alarm.days && alarm.days.includes(currentDay)) shouldTrigger = true;
+        }
+        if (shouldTrigger) triggerAlarm(alarm);
+      });
+    }
+
+    // ===== Voice Assistant (same as before) =====
+    let recognition = null, isListening = false;
+    async function requestMicrophonePermission() {
+      try { const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false }); stream.getTracks().forEach(t => t.stop()); return true; }
+      catch(e) { return false; }
+    }
+    function initVoice() {
+      if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+        document.getElementById('voiceStatus').innerHTML = t('voiceUnsupported') + ' <span class="samples">' + t('voiceSamples') + '</span>';
+        document.getElementById('voiceBtn').disabled = true; return false;
+      }
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new SpeechRecognition();
+      recognition.lang = 'fa-IR';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+      recognition.onstart = () => { isListening = true; document.getElementById('voiceBtn').classList.add('listening'); document.getElementById('voiceStatus').textContent = t('voiceListening'); document.getElementById('voiceStatus').className = 'voice-status'; };
+      recognition.onerror = (event) => {
+        console.warn('Voice error:', event.error);
+        stopListening();
+        if (event.error === 'not-allowed') { document.getElementById('voiceStatus').textContent = t('voicePermissionDenied'); document.getElementById('voiceStatus').className = 'voice-status error'; }
+        else if (event.error === 'no-speech') { document.getElementById('voiceStatus').textContent = t('voiceError'); document.getElementById('voiceStatus').className = 'voice-status error'; }
+        else { document.getElementById('voiceStatus').textContent = t('voiceError'); document.getElementById('voiceStatus').className = 'voice-status error'; }
+        document.getElementById('voiceStatus').innerHTML += ' <span class="samples">' + t('voiceSamples') + '</span>';
+      };
+      recognition.onend = stopListening;
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript.trim();
+        console.log('Voice transcript:', transcript);
+        const statusEl = document.getElementById('voiceStatus');
+        statusEl.innerHTML = t('voiceNoMatch') + ' <span class="transcript">"' + transcript + '"</span><br><span class="samples">' + t('voiceSamples') + '</span>';
+        statusEl.className = 'voice-status';
+        processVoiceCommand(transcript);
+      };
+      return true;
+    }
+    function stopListening() { if (recognition) try { recognition.stop(); } catch(e) {} isListening = false; document.getElementById('voiceBtn').classList.remove('listening'); }
+    async function toggleVoice() {
+      if (isListening) { stopListening(); return; }
+      const hasPermission = await requestMicrophonePermission();
+      if (!hasPermission) { document.getElementById('voiceStatus').textContent = t('voicePermissionDenied'); document.getElementById('voiceStatus').className = 'voice-status error'; document.getElementById('voiceStatus').innerHTML += ' <span class="samples">' + t('voiceSamples') + '</span>'; return; }
+      if (!recognition) { const ok = initVoice(); if (!ok) return; }
+      recognition.lang = 'fa-IR';
+      try { recognition.start(); speakText(t('voiceIntro')); } catch(e) { console.warn('Voice start error:', e); document.getElementById('voiceStatus').textContent = t('voiceError'); document.getElementById('voiceStatus').className = 'voice-status error'; document.getElementById('voiceStatus').innerHTML += ' <span class="samples">' + t('voiceSamples') + '</span>'; }
+    }
+    function speakText(text) { if (!('speechSynthesis' in window)) return; const utterance = new SpeechSynthesisUtterance(text); utterance.lang = 'fa-IR'; utterance.rate = 0.9; window.speechSynthesis.speak(utterance); }
+    document.getElementById('voiceBtn').addEventListener('click', toggleVoice);
+
+    function processVoiceCommand(text) {
+      const lower = text.toLowerCase();
+      const normalized = text.replace(/[۰-۹]/g, d => String.fromCharCode(d.charCodeAt(0) - 1728));
+      const numbers = normalized.match(/\d+(\.\d+)?/g) || [];
+      const numValues = numbers.map(Number);
+      let sleep = null, water = null, exercise = null, quality = null;
+      const qualityMap = { 'ضعیف':0, 'متوسط':1, 'خوب':2, 'عالی':3, 'بد':0, 'پور':0, 'فیر':1, 'گود':2, 'عال':3, 'اکسلنت':3, 'poor':0, 'fair':1, 'good':2, 'excellent':3, 'bad':0, 'average':1 };
+      for (let key in qualityMap) { if (lower.includes(key)) { quality = qualityMap[key]; break; } }
+      if (lower.includes('خواب') || lower.includes('sleep')) {
+        for (let v of numValues) { if (v >= 0 && v <= 24) { sleep = v; break; } }
+      }
+      if (lower.includes('آب') || lower.includes('water')) {
+        for (let v of numValues) { if (v >= 0 && v <= 30) { if (sleep !== null && v === sleep) continue; water = v; break; } }
+      }
+      if (lower.includes('ورزش') || lower.includes('exercise') || lower.includes('فعالیت')) {
+        for (let v of numValues) { if (v >= 0 && v <= 300) { if ((sleep !== null && v === sleep) || (water !== null && v === water)) continue; exercise = v; break; } }
+      }
+      if (sleep === null && water === null && exercise === null && quality === null) {
+        for (let v of numValues) {
+          if (sleep === null && v >= 0 && v <= 12) sleep = v;
+          else if (water === null && v >= 0 && v <= 20) water = v;
+          else if (exercise === null && v >= 0 && v <= 120) exercise = v;
+        }
+      }
+      let updated = false, parts = [];
+      if (sleep !== null) { state.sleepHours = clamp(sleep, 0, 12); updated = true; parts.push(t('voiceDetectedSleep') + ': ' + toFa(Math.round(state.sleepHours)) + 'h'); }
+      if (water !== null) { state.waterGlasses = clamp(Math.round(water), 0, 20); updated = true; parts.push(t('voiceDetectedWater') + ': ' + toFa(state.waterGlasses)); }
+      if (exercise !== null) { state.exerciseMinutes = clamp(Math.round(exercise/5)*5, 0, 120); updated = true; parts.push(t('voiceDetectedExercise') + ': ' + toFa(state.exerciseMinutes) + 'min'); }
+      if (quality !== null) { state.nutritionQuality = quality; updated = true; const qLabels = ['ضعیف', 'متوسط', 'خوب', 'عالی']; parts.push(t('voiceDetectedQuality') + ': ' + qLabels[quality]); }
+      if (updated) {
+        syncFormUI();
+        ['sleepHours','waterGlasses','exerciseMinutes','stepsInput'].forEach(id => { const el = document.getElementById(id); if (el) { el.dispatchEvent(new Event('input', {bubbles:true})); } });
+        setChipSelected('sleepQualityChips', state.sleepQuality);
+        setChipSelected('nutritionQualityChips', state.nutritionQuality);
+        setChipSelected('exerciseIntensityChips', state.exerciseIntensity);
+        onStateChange();
+        const statusEl = document.getElementById('voiceStatus');
+        statusEl.innerHTML = '✅ ' + t('voiceSuccess') + ' — ' + parts.join('، ') + ' <span class="samples">' + t('voiceSamples') + '</span>';
+        statusEl.className = 'voice-status success';
+        speakText(t('voiceConfirm'));
+        clearTimeout(saveTimeout);
+        saveTimeout = setTimeout(() => { autoSave(); }, 300);
+      } else {
+        const statusEl = document.getElementById('voiceStatus');
+        statusEl.innerHTML = t('voiceNoMatch') + ' <span class="transcript">"' + text + '"</span><br>❌ ' + t('voiceError') + ' <span class="samples">' + t('voiceSamples') + '</span>';
+        statusEl.className = 'voice-status error';
+        speakText(t('voiceError'));
+      }
+    }
+
+    // ===== Core app functions (condensed, same as before) =====
+    function isProfileComplete() { if (!userProfile) return false; return !!(userProfile.name && userProfile.age && userProfile.height && userProfile.weight); }
+    function updateProfileUI() {
+      if (!userProfile) {
+        document.getElementById('profileDisplayName').textContent = currentLang === 'fa' ? 'کاربر' : 'User';
+        document.getElementById('profileAge').textContent = '—';
+        document.getElementById('profileHeight').textContent = '—';
+        document.getElementById('profileWeight').textContent = '—';
+        document.getElementById('profileAvatar').textContent = '👤';
+        document.getElementById('profileBadge').textContent = '👤';
+        document.getElementById('profileBadge').className = 'badge-guest';
+        return;
+      }
+      const name = userProfile.name || (currentLang === 'fa' ? 'کاربر مهمان' : 'Guest User');
+      document.getElementById('profileDisplayName').textContent = name;
+      document.getElementById('profileAge').textContent = userProfile.age ? toFa(userProfile.age) : '—';
+      document.getElementById('profileHeight').textContent = userProfile.height ? toFa(userProfile.height) : '—';
+      document.getElementById('profileWeight').textContent = userProfile.weight ? toFa(userProfile.weight) : '—';
+      document.getElementById('profileAvatar').textContent = name.charAt(0).toUpperCase() || '👤';
+      if (isProfileComplete()) { document.getElementById('profileBadge').textContent = '⭐'; document.getElementById('profileBadge').className = 'badge-gold'; }
+      else { document.getElementById('profileBadge').textContent = '👤'; document.getElementById('profileBadge').className = 'badge-guest'; }
+    }
+
+    async function autoSave() {
+      clearTimeout(saveTimeout);
+      saveTimeout = setTimeout(async () => {
+        const scores = computeScores(state);
+        const savedKey = editingKey;
+        entries[savedKey] = Object.assign({}, state, { scores, savedAt: new Date().toISOString() });
+        await persistEntries(entries);
+        savedSnapshot = JSON.stringify(state);
+        refreshSaveStatus();
+        renderAnalysis(entries[savedKey]);
+        renderChart(); renderHistory(); renderStreak(); renderCalendar(); renderStatsDashboard(); renderGoals();
+        if (window._initialized) showToast(t('saved'));
+      }, 500);
+    }
+
+    const GAUGE_CX=160, GAUGE_CY=172, GAUGE_R=126;
+    const SEGMENTS = [{key:'sleep', start:34, end:90}, {key:'nutrition', start:-28, end:28}, {key:'exercise', start:-90, end:-34}];
+    function buildGauge(){
+      document.getElementById('gaugeTrack').setAttribute('d', describeArc(GAUGE_CX,GAUGE_CY,GAUGE_R,-90,90));
+      SEGMENTS.forEach(seg=>{
+        const path = document.getElementById('seg-'+seg.key);
+        path.setAttribute('d', describeArc(GAUGE_CX,GAUGE_CY,GAUGE_R,seg.start,seg.end));
+        const len = path.getTotalLength();
+        path.dataset.len = len;
+        path.style.strokeDasharray = len+' '+len;
+        path.style.strokeDashoffset = len;
+        const mid = (seg.start+seg.end)/2;
+        const pos = polarToCartesian(GAUGE_CX,GAUGE_CY,GAUGE_R+27, mid);
+        const icon = document.getElementById('icon-'+seg.key);
+        icon.setAttribute('x', pos.x);
+        icon.setAttribute('y', pos.y+6);
+      });
+    }
+
+    function renderGauge(scores, animate){
+      SEGMENTS.forEach(seg=>{
+        const path = document.getElementById('seg-'+seg.key);
+        const len = parseFloat(path.dataset.len);
+        const pct = clamp(scores[seg.key],0,100);
+        path.style.transition = animate ? 'stroke-dashoffset 700ms cubic-bezier(.4,0,.2,1)' : 'none';
+        path.style.strokeDashoffset = len*(1-pct/100);
+      });
+      document.getElementById('scoreNum').textContent = toFa(scores.total);
+      const tier = tierOf(scores.total);
+      const tierEl = document.getElementById('scoreTier');
+      tierEl.textContent = tier.label;
+      tierEl.style.color = tier.color;
+      tierEl.style.background = 'color-mix(in srgb, '+tier.color+' 14%, white)';
+    }
+
+    function refreshSaveStatus() {
+      const el = document.getElementById('saveStatus');
+      const currentSig = JSON.stringify(state);
+      if (savedSnapshot === currentSig) { el.className = 'save-status saved'; el.textContent = '✓ ' + (currentLang === 'fa' ? 'ذخیره شد' : 'Saved'); }
+      else { el.className = 'save-status saving'; el.textContent = '● ' + (currentLang === 'fa' ? 'در حال ذخیره...' : 'Saving...'); }
+    }
+
+    function onStateChange() {
+      const scores = computeScores(state);
+      renderGauge(scores, true);
+      refreshSaveStatus();
+      renderGoals();
+      autoSave();
+    }
+
+    function renderGoals() {
+      const sleepPct = clamp(Math.round(state.sleepHours/settings.sleepGoal*100), 0, 100);
+      const waterPct = clamp(Math.round(state.waterGlasses/settings.waterGoal*100), 0, 100);
+      const exercisePct = clamp(Math.round(state.exerciseMinutes/Math.max(1,settings.exerciseGoal)*100), 0, 100);
+      document.getElementById('goalSleepFill').style.width = sleepPct+'%';
+      document.getElementById('goalSleepPct').textContent = toFa(sleepPct)+'% ' + (currentLang === 'fa' ? 'از' : 'of') + ' ' + toFa(settings.sleepGoal)+' ' + (currentLang === 'fa' ? 'ساعت' : 'hr');
+      document.getElementById('goalWaterFill').style.width = waterPct+'%';
+      document.getElementById('goalWaterPct').textContent = toFa(waterPct)+'% ' + (currentLang === 'fa' ? 'از' : 'of') + ' ' + toFa(settings.waterGoal)+' ' + (currentLang === 'fa' ? 'لیوان' : 'glasses');
+      document.getElementById('goalExerciseFill').style.width = exercisePct+'%';
+      document.getElementById('goalExercisePct').textContent = toFa(exercisePct)+'% ' + (currentLang === 'fa' ? 'از' : 'of') + ' ' + toFa(settings.exerciseGoal)+' ' + (currentLang === 'fa' ? 'دقیقه' : 'min');
+    }
+
+    function renderAnalysis(entry) {
+      const box = document.getElementById('analysisBox');
+      if (!entry) { box.innerHTML = '<div class="empty-state"><span class="emoji">🧠</span><span>' + t('analysisEmpty') + '</span></div>'; return; }
+      const cats = [{key:'sleep', label: t('goalSleep'), emoji:'😴', score:entry.scores.sleep}, {key:'nutrition', label: t('goalWater'), emoji:'🥗', score:entry.scores.nutrition}, {key:'exercise', label: t('goalExercise'), emoji:'🏃', score:entry.scores.exercise}];
+      const sorted = cats.slice().sort((a,b)=>b.score-a.score);
+      const strongest = sorted[0], weakest = sorted[sorted.length-1];
+      const suggestions = {
+        sleep: state.sleepHours < settings.sleepGoal ? (currentLang === 'fa' ? 'سعی کن امشب کمی زودتر بخوابی تا به '+toFa(settings.sleepGoal)+' ساعت برسی.' : 'Try to sleep earlier tonight to reach '+toFa(settings.sleepGoal)+' hours.') : (currentLang === 'fa' ? 'کیفیت خوابت رو با ساعت خواب منظم حفظ کن.' : 'Keep your sleep quality with a regular schedule.'),
+        nutrition: state.waterGlasses < settings.waterGoal ? (currentLang === 'fa' ? toFa(Math.max(1, settings.waterGoal-state.waterGlasses))+' لیوان آب بیشتر بنوش.' : 'Drink '+toFa(Math.max(1, settings.waterGoal-state.waterGlasses))+' more glasses of water.') : (currentLang === 'fa' ? 'تغذیه‌ت رو متنوع و کم‌نمک نگه دار.' : 'Keep your nutrition varied and low-salt.'),
+        exercise: state.exerciseMinutes < settings.exerciseGoal ? (currentLang === 'fa' ? 'حتی '+toFa(15)+' دقیقه پیاده‌روی امروز کمک می‌کنه.' : 'Even '+toFa(15)+' minutes of walking today will help.') : (currentLang === 'fa' ? 'همین روند فعالیت رو ادامه بده.' : 'Keep up this activity level.')
+      };
+      let html = '';
+      html += `<div class="analysis-item is-strength"><span class="analysis-emoji">${strongest.emoji}</span><div><b>${currentLang === 'fa' ? 'نقطه قوت امروز' : 'Strength'}</b>${strongest.label} (${toFa(strongest.score)} ${currentLang === 'fa' ? 'امتیاز' : 'pts'})</div></div>`;
+      html += `<div class="analysis-item is-weakness"><span class="analysis-emoji">${weakest.emoji}</span><div><b>${currentLang === 'fa' ? 'نقطه ضعف امروز' : 'Weakness'}</b>${weakest.label} (${toFa(weakest.score)} ${currentLang === 'fa' ? 'امتیاز' : 'pts'})</div></div>`;
+      html += `<div class="analysis-item is-suggestion"><span class="analysis-emoji">💡</span><div><b>${currentLang === 'fa' ? 'پیشنهاد' : 'Suggestion'}</b>${suggestions[weakest.key]}</div></div>`;
+      box.innerHTML = html;
+    }
+
+    function syncFormUI() {
+      document.getElementById('sleepHours').value = state.sleepHours;
+      document.getElementById('sleepHoursVal').textContent = toFa(state.sleepHours)+' ' + (currentLang === 'fa' ? 'ساعت' : 'hr');
+      document.getElementById('waterGlasses').value = state.waterGlasses;
+      document.getElementById('waterVal').textContent = toFa(state.waterGlasses)+' ' + (currentLang === 'fa' ? 'لیوان' : 'glasses');
+      document.getElementById('exerciseMinutes').value = state.exerciseMinutes;
+      document.getElementById('exerciseMinutesVal').textContent = toFa(state.exerciseMinutes)+' ' + (currentLang === 'fa' ? 'دقیقه' : 'min');
+      document.getElementById('stepsInput').value = state.steps || 0;
+      document.getElementById('stepsVal').textContent = toFa(state.steps || 0)+' ' + (currentLang === 'fa' ? 'قدم' : 'steps');
+      setChipSelected('sleepQualityChips', state.sleepQuality);
+      setChipSelected('nutritionQualityChips', state.nutritionQuality);
+      setChipSelected('exerciseIntensityChips', state.exerciseIntensity);
+      document.getElementById('weightInput').value = state.weight != null ? state.weight : '';
+      document.getElementById('bpSystolicInput').value = state.bpSystolic != null ? state.bpSystolic : '';
+      document.getElementById('bpDiastolicInput').value = state.bpDiastolic != null ? state.bpDiastolic : '';
+      document.getElementById('pulseInput').value = state.pulse != null ? state.pulse : '';
+      document.querySelectorAll('#moodChips .mood-chip').forEach(chip => chip.classList.toggle('is-selected', state.mood != null && Number(chip.dataset.value) === state.mood));
+      updateBmiReadout();
+    }
+
+    function setChipSelected(groupId, value) {
+      const group = document.getElementById(groupId);
+      if (!group) return;
+      group.querySelectorAll('.chip').forEach(chip => chip.classList.toggle('is-selected', Number(chip.dataset.value) === value));
+    }
+
+    function updateBmiReadout() {
+      const el = document.getElementById('bmiReadout');
+      const bmi = computeBmi(state.weight, settings.height);
+      if (bmi) { el.style.display = 'block'; el.innerHTML = 'BMI: <b>'+toFa(bmi.toFixed(1))+'</b> — ' + bmiLabel(bmi); }
+      else el.style.display = 'none';
+    }
+
+    function setupStepButtons(decId, incId, valId, inputId, min, max, step, stateKey) {
+      const dec = document.getElementById(decId), inc = document.getElementById(incId), valEl = document.getElementById(valId), input = document.getElementById(inputId);
+      function update(newVal) {
+        state[stateKey] = clamp(Math.round(newVal/step)*step, min, max);
+        input.value = state[stateKey];
+        const label = currentLang === 'fa' ? (stateKey === 'sleepHours' ? 'ساعت' : 'لیوان') : (stateKey === 'sleepHours' ? 'hr' : 'glasses');
+        valEl.textContent = toFa(state[stateKey]) + ' ' + label;
+        onStateChange();
+      }
+      dec.addEventListener('click', ()=>{ const newVal = state[stateKey] - step; if (newVal >= min) update(newVal); });
+      inc.addEventListener('click', ()=>{ const newVal = state[stateKey] + step; if (newVal <= max) update(newVal); });
+    }
+    setupStepButtons('sleepDec','sleepInc','sleepHoursVal','sleepHours',0,12,0.5,'sleepHours');
+    setupStepButtons('waterDec','waterInc','waterVal','waterGlasses',0,20,1,'waterGlasses');
+
+    document.getElementById('weightInput').addEventListener('input', e=>{ const v=e.target.value; state.weight = v===''?null:Number(v); updateBmiReadout(); onStateChange(); });
+    document.getElementById('bpSystolicInput').addEventListener('input', e=>{ const v=e.target.value; state.bpSystolic = v===''?null:Number(v); onStateChange(); });
+    document.getElementById('bpDiastolicInput').addEventListener('input', e=>{ const v=e.target.value; state.bpDiastolic = v===''?null:Number(v); onStateChange(); });
+    document.getElementById('pulseInput').addEventListener('input', e=>{ const v=e.target.value; state.pulse = v===''?null:Number(v); onStateChange(); });
+    document.getElementById('moodChips').addEventListener('click', e=>{ const btn=e.target.closest('.mood-chip'); if(!btn) return; const val=Number(btn.dataset.value); state.mood = (state.mood===val)?null:val; syncFormUI(); onStateChange(); });
+
+    document.getElementById('sleepHours').addEventListener('input', e=>{ state.sleepHours=Number(e.target.value); document.getElementById('sleepHoursVal').textContent = toFa(state.sleepHours)+' '+(currentLang==='fa'?'ساعت':'hr'); onStateChange(); });
+    document.getElementById('waterGlasses').addEventListener('input', e=>{ state.waterGlasses=Number(e.target.value); document.getElementById('waterVal').textContent = toFa(state.waterGlasses)+' '+(currentLang==='fa'?'لیوان':'glasses'); onStateChange(); });
+    document.getElementById('exerciseMinutes').addEventListener('input', e=>{ state.exerciseMinutes=Number(e.target.value); document.getElementById('exerciseMinutesVal').textContent = toFa(state.exerciseMinutes)+' '+(currentLang==='fa'?'دقیقه':'min'); onStateChange(); });
+    document.getElementById('stepsInput').addEventListener('input', e=>{ state.steps=Number(e.target.value); document.getElementById('stepsVal').textContent = toFa(state.steps)+' '+(currentLang==='fa'?'قدم':'steps'); onStateChange(); });
+
+    document.querySelectorAll('.chip-group').forEach(group=>{
+      group.addEventListener('click', e=>{ const btn=e.target.closest('.chip'); if(!btn) return; const key=group.dataset.group; state[key]=Number(btn.dataset.value); setChipSelected(group.id, state[key]); onStateChange(); });
+    });
+
+    function gaugeDateLabel(key){ const d=parseDateKey(key); const label = currentLang==='fa' ? formatJalali(d,{weekday:'long',day:'numeric',month:'long'}) : formatEnglish(d,{weekday:'long',day:'numeric',month:'long',year:'numeric'}); return key===todayKey ? label + ' ('+t('today')+')' : label; }
+    function stateFromEntry(entry){ return { sleepHours:entry.sleepHours, sleepQuality:entry.sleepQuality, exerciseMinutes:entry.exerciseMinutes, exerciseIntensity:entry.exerciseIntensity, nutritionQuality:entry.nutritionQuality, waterGlasses:entry.waterGlasses, weight: entry.weight!=null?entry.weight:null, bpSystolic: entry.bpSystolic!=null?entry.bpSystolic:null, bpDiastolic: entry.bpDiastolic!=null?entry.bpDiastolic:null, pulse: entry.pulse!=null?entry.pulse:null, mood: entry.mood!=null?entry.mood:null, steps: entry.steps||0 }; }
+
+    function enterEditMode(key){ const entry=entries[key]; if(!entry) return; editingKey=key; state=stateFromEntry(entry); savedSnapshot=JSON.stringify(state); syncFormUI(); onStateChange(); renderAnalysis(entry); document.getElementById('gaugeDate').textContent=gaugeDateLabel(key); document.getElementById('editBanner').style.display='flex'; document.getElementById('editBannerDate').textContent = currentLang==='fa'?formatJalali(parseDateKey(key),{day:'numeric',month:'long'}):formatEnglish(parseDateKey(key),{day:'numeric',month:'long'}); document.querySelector('.panel-left').scrollIntoView({behavior:'smooth',block:'start'}); }
+    function exitEditMode(){ editingKey=todayKey; if(entries[todayKey]){ state=stateFromEntry(entries[todayKey]); savedSnapshot=JSON.stringify(state); renderAnalysis(entries[todayKey]); } else { state=Object.assign({},DEFAULT_STATE); savedSnapshot=null; renderAnalysis(null); } syncFormUI(); onStateChange(); document.getElementById('gaugeDate').textContent=gaugeDateLabel(todayKey); document.getElementById('editBanner').style.display='none'; }
+    document.getElementById('cancelEditBtn').addEventListener('click', exitEditMode);
+
+    let toastTimer=null;
+    function showToast(msg){ const el=document.getElementById('toast'); el.textContent=msg; el.classList.add('visible'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove('visible'),3000); }
+
+    const modalOverlay=document.getElementById('modalOverlay');
+    let modalConfirmAction=null;
+    function openConfirm(title,text,onConfirm){ document.getElementById('modalTitle').textContent=title; document.getElementById('modalText').textContent=text; modalConfirmAction=onConfirm; modalOverlay.classList.add('visible'); }
+    function closeConfirm(){ modalOverlay.classList.remove('visible'); modalConfirmAction=null; }
+    document.getElementById('modalCancel').addEventListener('click', closeConfirm);
+    modalOverlay.addEventListener('click', e=>{ if(e.target===modalOverlay) closeConfirm(); });
+    document.getElementById('modalConfirm').addEventListener('click', async ()=>{ const action=modalConfirmAction; closeConfirm(); if(action) await action(); });
+
+    document.getElementById('resetLink').addEventListener('click', ()=>{
+      openConfirm(t('modalTitle'), t('modalText'), async ()=>{
+        entries={}; await persistEntries(entries);
+        editingKey=todayKey; state=Object.assign({},DEFAULT_STATE); savedSnapshot=null;
+        syncFormUI(); onStateChange();
+        document.getElementById('gaugeDate').textContent=gaugeDateLabel(todayKey);
+        document.getElementById('editBanner').style.display='none';
+        renderChart(); renderHistory(); renderStreak(); renderAnalysis(null); renderCalendar(); renderStatsDashboard();
+        showToast(currentLang==='fa'?'همه داده‌ها حذف شدند':'All data cleared');
+      });
+    });
+
+    function requestDeleteEntry(key){ const d=parseDateKey(key); const label=currentLang==='fa'?formatJalali(d,{weekday:'long',day:'numeric',month:'long'}):formatEnglish(d,{weekday:'long',day:'numeric',month:'long',year:'numeric'}); openConfirm(t('modalTitle'), label + ' ' + (currentLang==='fa'?'از تاریخچه حذف می‌شه.':'will be removed from history.'), async ()=>{ delete entries[key]; await persistEntries(entries); if(key===editingKey) exitEditMode(); renderChart(); renderHistory(); renderStreak(); renderCalendar(); renderStatsDashboard(); showToast(currentLang==='fa'?'روز حذف شد':'Day deleted'); }); }
+
+    function sortedEntryList(){ return Object.keys(entries).sort().map(k=>({key:k, data:entries[k]})); }
+
+    function renderChart(){ const wrap=document.getElementById('chartWrap'); const list=sortedEntryList().slice(-14); if(list.length===0){ wrap.innerHTML='<div class="empty-state"><span class="emoji">📈</span><span>'+(currentLang==='fa'?'هنوز داده‌ای برای نمایش روند نیست.':'No data yet.')+'</span></div>'; return; } const W=600,H=240,padL=18,padR=40,padT=18,padB=30,plotW=W-padL-padR,plotH=H-padT-padB,n=list.length,stepX=n>1?plotW/(n-1):0; function xAt(i){ return n>1?padL+(n-1-i)*stepX:padL+plotW/2; } function yAt(score){ return padT+plotH*(1-score/100); } const baseY=padT+plotH; let linePts=[]; list.forEach((item,i)=>{ const x=xAt(i), y=yAt(item.data.scores.total); linePts.push([x,y]); }); let linePath='M '+linePts.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L '); let areaPath='M '+linePts[0][0].toFixed(1)+' '+baseY+' L '+linePts.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L ')+' L '+linePts[linePts.length-1][0].toFixed(1)+' '+baseY+' Z'; const grid=[0,50,100].map(v=>{ const y=yAt(v); return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="#E7E2D6" stroke-width="1"/><text class="axis-label" x="${W-padR+8}" y="${y+4}">${toFa(v)}</text>`; }).join(''); const oldestDate=parseDateKey(list[0].key), newestDate=parseDateKey(list[n-1].key); const newestLabel=list[n-1].key===todayKey?t('today'):(currentLang==='fa'?formatJalali(newestDate,{day:'numeric',month:'short'}):formatEnglish(newestDate,{day:'numeric',month:'short'})); const oldestLabel=currentLang==='fa'?formatJalali(oldestDate,{day:'numeric',month:'short'}):formatEnglish(oldestDate,{day:'numeric',month:'short'}); const points=list.map((item,i)=>{ const x=xAt(i), y=yAt(item.data.scores.total); return `<circle class="chart-point" cx="${x}" cy="${y}" r="5" fill="var(--c-card)" stroke="#F07A52" stroke-width="2.5" data-key="${item.key}" data-score="${item.data.scores.total}"></circle>`; }).join(''); wrap.innerHTML=`<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F07A52" stop-opacity="0.28"/><stop offset="100%" stop-color="#F07A52" stop-opacity="0"/></linearGradient></defs>${grid}<path d="${areaPath}" fill="url(#areaGrad)" stroke="none"/><path d="${linePath}" fill="none" stroke="#F07A52" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${points}<text class="axis-label" x="${xAt(n-1)}" y="${H-6}" text-anchor="middle">${newestLabel}</text>${n>1?`<text class="axis-label" x="${xAt(0)}" y="${H-6}" text-anchor="middle">${oldestLabel}</text>`:''}</svg><div class="chart-tooltip" id="chartTooltip"></div>`; const tooltip=document.getElementById('chartTooltip'); wrap.querySelectorAll('.chart-point').forEach(pt=>{ pt.addEventListener('click', (e)=>{ const key=pt.dataset.key, score=pt.dataset.score; const d=parseDateKey(key); const label=(key===todayKey?t('today'):(currentLang==='fa'?formatJalali(d,{day:'numeric',month:'long'}):formatEnglish(d,{day:'numeric',month:'long'}))) + ' — ' + toFa(score); tooltip.textContent=label; const svgRect=wrap.querySelector('svg').getBoundingClientRect(); const scaleX=svgRect.width/W, scaleY=svgRect.height/H; tooltip.style.left=(parseFloat(pt.getAttribute('cx'))*scaleX)+'px'; tooltip.style.top=(parseFloat(pt.getAttribute('cy'))*scaleY)+'px'; tooltip.classList.add('visible'); clearTimeout(tooltip._t); tooltip._t=setTimeout(()=>tooltip.classList.remove('visible'),1800); }); }); }
+
+    const editPencilSvg='<svg viewBox="0 0 16 16" fill="none"><path d="M11.3 2.3a1.5 1.5 0 0 1 2.1 0l.3.3a1.5 1.5 0 0 1 0 2.1l-7.8 7.8-3 .8.8-3 7.6-7.6Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>';
+    function renderHistory(){ const el=document.getElementById('historyList'); const list=sortedEntryList().reverse(); if(list.length===0){ el.innerHTML='<div class="empty-state"><span class="emoji">🗓️</span><span>'+(currentLang==='fa'?'هنوز هیچ روزی ثبت نشده.':'No days recorded yet.')+'</span></div>'; return; } el.innerHTML=list.map(item=>{ const d=parseDateKey(item.key); const label=item.key===todayKey?t('today'):(currentLang==='fa'?formatJalali(d,{weekday:'short',day:'numeric',month:'short',year:'numeric'}):formatEnglish(d,{weekday:'short',day:'numeric',month:'short',year:'numeric'})); const fullDate=currentLang==='fa'?formatJalali(d,{weekday:'long',day:'numeric',month:'long',year:'numeric'}):formatEnglish(d,{weekday:'long',day:'numeric',month:'long',year:'numeric'}); return `<div class="history-row"><div class="history-dot" style="background:${tierDot(item.data.scores.total)}"></div><div class="history-date" title="${fullDate}">${label}</div><div class="history-score">${toFa(item.data.scores.total)}</div><button class="history-edit" data-key="${item.key}" aria-label="ویرایش">${editPencilSvg}</button><button class="history-del" data-key="${item.key}" aria-label="حذف">×</button></div>`; }).join(''); el.querySelectorAll('.history-edit').forEach(btn=>btn.addEventListener('click', ()=>enterEditMode(btn.dataset.key))); el.querySelectorAll('.history-del').forEach(btn=>btn.addEventListener('click', ()=>requestDeleteEntry(btn.dataset.key))); }
+
+    function escapeHtml(str){ const div=document.createElement('div'); div.textContent=str; return div.innerHTML; }
+    function escapeAttr(str){ return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    function getLocalDateTime(dateStr){ const d=new Date(dateStr); return { year:d.getFullYear(), month:String(d.getMonth()+1).padStart(2,'0'), day:String(d.getDate()).padStart(2,'0'), hours:String(d.getHours()).padStart(2,'0'), minutes:String(d.getMinutes()).padStart(2,'0'), dateObj:d }; }
+    function formatTodoDateTime(isoStr){ const dt=getLocalDateTime(isoStr); const d=dt.dateObj; if(currentLang==='fa'){ const jalali=gregorianToJalali(d); return `${toFa(jalali.jy)}/${toFa(String(jalali.jm).padStart(2,'0'))}/${toFa(String(jalali.jd).padStart(2,'0'))} - ${toFa(dt.hours)}:${toFa(dt.minutes)}`; } return `${dt.year}/${dt.month}/${dt.day} - ${dt.hours}:${dt.minutes}`; }
+
+    let editingTodoId=null;
+    const editPencilSvgTodo='<svg viewBox="0 0 16 16" fill="none"><path d="M11.3 2.3a1.5 1.5 0 0 1 2.1 0l.3.3a1.5 1.5 0 0 1 0 2.1l-7.8 7.8-3 .8.8-3 7.6-7.6Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>';
+    const todoCheckSvg='<svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 11.5L13 4.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    function renderTodos(){ const list=document.getElementById('todoList'), progress=document.getElementById('todoProgress'); if(todos.length===0){ list.innerHTML='<div class="empty-state"><span class="emoji">✅</span><span>'+(currentLang==='fa'?'هنوز کاری اضافه نکردی.':'No tasks added yet.')+'</span></div>'; progress.style.display='none'; return; } const doneCount=todos.filter(t=>t.done).length; progress.style.display='block'; progress.textContent=toFa(doneCount)+' '+(currentLang==='fa'?'از':'of')+' '+toFa(todos.length)+' '+(currentLang==='fa'?'کار انجام شده':'tasks done'); list.innerHTML=todos.map((t,idx)=>{ if(editingTodoId===t.id){ return `<div class="todo-row"><div class="todo-edit-row"><input type="text" class="todo-edit-input" id="todoEditInput-${t.id}" value="${escapeAttr(t.text)}" maxlength="120"><button class="todo-edit-save" data-id="${t.id}" aria-label="${currentLang==='fa'?'ذخیره':'Save'}">${todoCheckSvg}</button><button class="todo-edit-cancel" data-id="${t.id}" aria-label="${currentLang==='fa'?'انصراف':'Cancel'}">×</button></div></div>`; } let dateLabel=''; if(t.done && t.completedAt){ dateLabel=(currentLang==='fa'?'✓ تکمیل: ':'✓ Done: ')+formatTodoDateTime(t.completedAt); } else if(!t.done && t.createdAt){ dateLabel=formatTodoDateTime(t.createdAt); } return `<div class="todo-row"><button class="todo-checkbox ${t.done?'is-done':''}" data-id="${t.id}" aria-label="تکمیل شد">${todoCheckSvg}</button><div class="todo-text ${t.done?'is-done':''}">${escapeHtml(t.text)}${dateLabel?`<span class="todo-time">${dateLabel}</span>`:''}</div><div class="todo-move"><button class="todo-move-btn" data-id="${t.id}" data-dir="up" ${idx===0?'disabled':''} aria-label="${currentLang==='fa'?'انتقال به بالا':'Move up'}">▲</button><button class="todo-move-btn" data-id="${t.id}" data-dir="down" ${idx===todos.length-1?'disabled':''} aria-label="${currentLang==='fa'?'انتقال به پایین':'Move down'}">▼</button></div><button class="todo-edit" data-id="${t.id}" aria-label="${currentLang==='fa'?'ویرایش':'Edit'}">${editPencilSvgTodo}</button><button class="todo-del" data-id="${t.id}" aria-label="حذف">×</button></div>`; }).join(''); list.querySelectorAll('.todo-checkbox').forEach(btn=>btn.addEventListener('click', ()=>toggleTodo(btn.dataset.id))); list.querySelectorAll('.todo-del').forEach(btn=>btn.addEventListener('click', ()=>deleteTodo(btn.dataset.id))); list.querySelectorAll('.todo-move-btn').forEach(btn=>{ if(btn.disabled) return; btn.addEventListener('click', ()=>moveTodo(btn.dataset.id,btn.dataset.dir)); }); list.querySelectorAll('.todo-edit').forEach(btn=>{ btn.addEventListener('click', ()=>{ editingTodoId=btn.dataset.id; renderTodos(); const inp=document.getElementById('todoEditInput-'+btn.dataset.id); if(inp){ inp.focus(); inp.select(); } }); }); list.querySelectorAll('.todo-edit-save').forEach(btn=>btn.addEventListener('click', ()=>saveEditTodo(btn.dataset.id))); list.querySelectorAll('.todo-edit-cancel').forEach(btn=>btn.addEventListener('click', ()=>{ editingTodoId=null; renderTodos(); })); list.querySelectorAll('.todo-edit-input').forEach(inp=>{ inp.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); saveEditTodo(inp.id.replace('todoEditInput-','')); } else if(e.key==='Escape'){ editingTodoId=null; renderTodos(); } }); }); }
+
+    // ===== تغییر اصلی: ترتیب کارها =====
+    // 1. کار جدید به ابتدای لیست اضافه شود
+    async function addTodo(rawText) {
+      const text = rawText.trim();
+      if (!text) return;
+      // استفاده از unshift برای قرار دادن در ابتدا
+      todos.unshift({
+        id: 't' + Date.now() + Math.random().toString(36).slice(2,7),
+        text,
+        done: false,
+        createdAt: new Date().toISOString(),
+        completedAt: null
+      });
+      renderTodos();
+      await persistTodos();
+    }
+
+    // 2. وقتی کار تیک می‌خورد، به انتهای لیست برود (اگر انجام شد) یا به ابتدا (اگر انجام نشد)
+    async function toggleTodo(id) {
+      const idx = todos.findIndex(t => t.id === id);
+      if (idx === -1) return;
+      const task = todos[idx];
+      // حذف از جای فعلی
+      todos.splice(idx, 1);
+      // تغییر وضعیت
+      task.done = !task.done;
+      task.completedAt = task.done ? new Date().toISOString() : null;
+      // قرار دادن در موقعیت مناسب
+      if (task.done) {
+        // کار انجام شده: به انتهای لیست
+        todos.push(task);
+      } else {
+        // کار انجام نشده: به ابتدای لیست (اولین کار انجام‌نشده)
+        todos.unshift(task);
+      }
+      renderTodos();
+      await persistTodos();
+    }
+
+    // توابع دیگر todo بدون تغییر
+    async function deleteTodo(id){ todos=todos.filter(x=>x.id!==id); if(editingTodoId===id) editingTodoId=null; renderTodos(); await persistTodos(); }
+    async function moveTodo(id,dir){ const idx=todos.findIndex(x=>x.id===id); if(idx===-1) return; const swapIdx=dir==='up'?idx-1:idx+1; if(swapIdx<0||swapIdx>=todos.length) return; const tmp=todos[idx]; todos[idx]=todos[swapIdx]; todos[swapIdx]=tmp; renderTodos(); await persistTodos(); }
+    async function saveEditTodo(id){ const inp=document.getElementById('todoEditInput-'+id); if(!inp) return; const newText=inp.value.trim(); if(newText){ const t=todos.find(x=>x.id===id); if(t) t.text=newText; } editingTodoId=null; renderTodos(); await persistTodos(); }
+    document.getElementById('todoAddBtn').addEventListener('click', ()=>{ addTodo(document.getElementById('todoInput').value); document.getElementById('todoInput').value=''; });
+    document.getElementById('todoInput').addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); addTodo(e.target.value); e.target.value=''; } });
+
+    function computeStreak(){ let streak=0; let d=entries[todayKey]?new Date(TODAY):(()=>{ const y=new Date(TODAY); y.setDate(y.getDate()-1); return y; })(); while(true){ const key=getDateKey(d); if(entries[key]){ streak++; d.setDate(d.getDate()-1); } else break; } return streak; }
+    function renderStreak(){ const streak=computeStreak(); const pill=document.getElementById('streakPill'); if(streak>0){ pill.style.display='flex'; document.getElementById('streakNum').textContent=toFa(streak)+' '+(currentLang==='fa'?'روز متوالی':'day streak'); } else pill.style.display='none'; }
+
+    const settingsModalOverlay=document.getElementById('settingsModalOverlay');
+    document.getElementById('settingsBtn').addEventListener('click', ()=>{ document.getElementById('settingHeight').value=settings.height; document.getElementById('settingSleepGoal').value=settings.sleepGoal; document.getElementById('settingWaterGoal').value=settings.waterGoal; document.getElementById('settingExerciseGoal').value=settings.exerciseGoal; settingsModalOverlay.classList.add('visible'); });
+    document.getElementById('settingsCancel').addEventListener('click', ()=>settingsModalOverlay.classList.remove('visible'));
+    settingsModalOverlay.addEventListener('click', e=>{ if(e.target===settingsModalOverlay) settingsModalOverlay.classList.remove('visible'); });
+    document.getElementById('settingsSave').addEventListener('click', async ()=>{
+      const h=Number(document.getElementById('settingHeight').value), sg=Number(document.getElementById('settingSleepGoal').value), wg=Number(document.getElementById('settingWaterGoal').value), eg=Number(document.getElementById('settingExerciseGoal').value);
+      settings={ height: h>0?h:DEFAULT_SETTINGS.height, sleepGoal: sg>0?sg:DEFAULT_SETTINGS.sleepGoal, waterGoal: wg>0?wg:DEFAULT_SETTINGS.waterGoal, exerciseGoal: eg>=0?eg:DEFAULT_SETTINGS.exerciseGoal };
+      await persistSettings(); settingsModalOverlay.classList.remove('visible'); updateBmiReadout(); renderGoals(); showToast(currentLang==='fa'?'تنظیمات ذخیره شد ✅':'Settings saved ✅');
+    });
+
+    function applyTheme(theme){ document.documentElement.setAttribute('data-theme', theme); document.getElementById('themeToggle').textContent = theme==='dark'?'☀️':'🌙'; saveTheme(theme); }
+    document.getElementById('themeToggle').addEventListener('click', ()=>{ const current=document.documentElement.getAttribute('data-theme')||'light'; applyTheme(current==='light'?'dark':'light'); });
+
+    function applyLanguage(lang){ currentLang=lang; document.documentElement.setAttribute('dir', lang==='fa'?'rtl':'ltr'); document.documentElement.setAttribute('lang', lang); document.getElementById('langToggle').textContent = lang==='fa'?'🇬🇧 English':'🇮🇷 فارسی'; saveLang(lang); updateUI(); }
+    document.getElementById('langToggle').addEventListener('click', ()=>{ const nextLang=currentLang==='fa'?'en':'fa'; applyLanguage(nextLang); });
+
+    function updateUI(){
+      // Update all text elements including date labels
+      document.getElementById('appTitle').textContent=t('appTitle');
+      document.getElementById('brandSubtitle').textContent=t('appSub');
+      document.getElementById('scoreLabel').textContent=t('scoreLabel');
+      document.getElementById('sleepTitle').textContent=t('sleepTitle');
+      document.getElementById('sleepHoursLabel').textContent=t('sleepHoursLabel');
+      document.getElementById('sleepQualityLabel').textContent=t('sleepQualityLabel');
+      document.getElementById('sq0').textContent=t('sleepBad');
+      document.getElementById('sq1').textContent=t('sleepMed');
+      document.getElementById('sq2').textContent=t('sleepGood');
+      document.getElementById('sq3').textContent=t('sleepExcel');
+      document.getElementById('nutritionTitle').textContent=t('nutritionTitle');
+      document.getElementById('nutritionQualityLabel').textContent=t('nutritionQualityLabel');
+      document.getElementById('nq0').textContent=t('nutritionBad');
+      document.getElementById('nq1').textContent=t('nutritionMed');
+      document.getElementById('nq2').textContent=t('nutritionGood');
+      document.getElementById('nq3').textContent=t('nutritionExcel');
+      document.getElementById('waterLabel').textContent=t('waterLabel');
+      document.getElementById('exerciseTitle').textContent=t('exerciseTitle');
+      document.getElementById('exerciseMinutesLabel').textContent=t('exerciseMinutesLabel');
+      document.getElementById('intensityLabel').textContent=t('intensityLabel');
+      document.getElementById('ei0').textContent=t('intensityRest');
+      document.getElementById('ei1').textContent=t('intensityLight');
+      document.getElementById('ei2').textContent=t('intensityMod');
+      document.getElementById('ei3').textContent=t('intensityHard');
+      document.getElementById('stepsTitle').innerHTML=t('stepsTitle')+' <span class="optional-tag">'+t('optionalTag')+'</span>';
+      document.getElementById('stepsLabel').textContent=t('stepsLabel');
+      document.getElementById('stepsAutoBadge').textContent=t('stepsAuto');
+      document.getElementById('healthTitle').innerHTML=t('healthTitle')+' <span class="optional-tag">'+t('optionalTag')+'</span>';
+      document.getElementById('moodLabel').textContent=t('moodLabel');
+      document.getElementById('weightLabel').textContent=t('weightLabel');
+      document.getElementById('bpSystolicLabel').textContent=t('bpSystolicLabel');
+      document.getElementById('bpDiastolicLabel').textContent=t('bpDiastolicLabel');
+      document.getElementById('pulseLabel').textContent=t('pulseLabel');
+      document.getElementById('goalsTitle').textContent=t('goalsTitle');
+      document.getElementById('goalsSub').textContent=t('goalsSub');
+      document.getElementById('goalSleepLabel').textContent=t('goalSleep');
+      document.getElementById('goalWaterLabel').textContent=t('goalWater');
+      document.getElementById('goalExerciseLabel').textContent=t('goalExercise');
+      document.getElementById('analysisTitle').textContent=t('analysisTitle');
+      document.getElementById('analysisSub').textContent=t('analysisSub');
+      document.getElementById('tipsTitle').textContent=t('tipsTitle');
+      document.getElementById('tipsSub').textContent=t('tipsSub');
+      renderHealthTips();
+      document.getElementById('todoTitle').textContent=t('todoTitle');
+      document.getElementById('todoSub').textContent=t('todoSub');
+      document.getElementById('chartTitle').textContent=t('chartTitle');
+      document.getElementById('chartSub').textContent=t('chartSub');
+      document.getElementById('legendExcellent').textContent=t('legendExcellent');
+      document.getElementById('legendGood').textContent=t('legendGood');
+      document.getElementById('legendFair').textContent=t('legendFair');
+      document.getElementById('legendCare').textContent=t('legendCare');
+      document.getElementById('statsTitle').textContent=t('statsTitle');
+      document.getElementById('historyTitle').textContent=t('historyTitle');
+      document.getElementById('historySub').textContent=t('historySub');
+      document.getElementById('exportText').textContent=t('exportText');
+      document.getElementById('importText').textContent=t('importText');
+      document.getElementById('resetLink').textContent=t('resetText');
+      const creatorEl = document.getElementById('appCreator');
+      if (creatorEl) creatorEl.textContent = t('appCreator');
+      document.getElementById('editBannerPrefix').textContent=t('editingPrefix');
+      document.getElementById('cancelEditBtn').textContent=t('cancelEdit');
+      document.getElementById('installTitle').textContent=t('installTitle');
+      document.getElementById('installSub').textContent=t('installSub');
+      document.getElementById('installBtn').textContent=t('installBtn');
+      document.getElementById('settingsModalTitle').textContent=t('settingsTitle');
+      document.getElementById('settingsModalText').textContent=t('settingsText');
+      document.getElementById('settingHeightLabel').textContent=t('settingHeight');
+      document.getElementById('settingSleepGoalLabel').textContent=t('settingSleepGoal');
+      document.getElementById('settingWaterGoalLabel').textContent=t('settingWaterGoal');
+      document.getElementById('settingExerciseGoalLabel').textContent=t('settingExerciseGoal');
+      document.getElementById('settingsSave').textContent=t('settingsSave');
+      document.getElementById('settingsCancel').textContent=t('settingsCancel');
+      document.getElementById('calSearchInput').placeholder=t('searchPlaceholder');
+      document.getElementById('calSearchBtn').textContent=t('searchBtn');
+      document.getElementById('modalTitle').textContent=t('modalTitle');
+      document.getElementById('modalText').textContent=t('modalText');
+      document.getElementById('modalCancel').textContent=t('modalCancel');
+      document.getElementById('modalConfirm').textContent=t('modalConfirm');
+      document.getElementById('profileModalTitle').textContent=t('profileTitle');
+      document.getElementById('profileModalText').textContent=t('profileText');
+      document.getElementById('profileNameLabel').textContent=t('profileName');
+      document.getElementById('profileAgeLabel').textContent=t('profileAge');
+      document.getElementById('profileHeightLabel').textContent=t('profileHeight');
+      document.getElementById('profileWeightLabel').textContent=t('profileWeight');
+      document.getElementById('profileSave').textContent=t('profileSave');
+      document.getElementById('profileCancel').textContent=t('profileCancel');
+      document.getElementById('voiceBtn').title=t('voiceHint');
+      const vStatus=document.getElementById('voiceStatus');
+      if(vStatus && !vStatus.classList.contains('success') && !vStatus.classList.contains('error')) {
+        vStatus.innerHTML='<span class="samples">📢 '+t('voiceSamples')+' ⚠️ '+t('voiceRequiresInternet')+'</span>';
+      }
+      const saveBtnText=document.getElementById('saveBtnText');
+      if(editingKey===todayKey) saveBtnText.textContent=entries[todayKey]?t('saveUpdate'):t('saveBtn');
+      else saveBtnText.textContent=t('saveEdit');
+      document.getElementById('gaugeDate').textContent=gaugeDateLabel(editingKey);
+      renderGoals(); renderAnalysis(entries[editingKey]||null); renderChart(); renderHistory(); renderStreak(); renderTodos(); renderCalendar(); renderStatsDashboard(); syncFormUI(); updateProfileUI();
+      // Alarm UI
+      document.getElementById('alarmModalTitle').textContent=t('alarmTitle');
+      document.getElementById('alarmModalText').textContent=t('alarmSub');
+      document.getElementById('alarmFormTitle').textContent=t('alarmNew');
+      document.getElementById('alarmTitleLabel').textContent=t('alarmTitleLabel');
+      document.getElementById('alarmTimeLabel').textContent=t('alarmTimeLabel');
+      document.getElementById('alarmDateLabel').textContent=t('alarmDateLabel');
+      document.getElementById('alarmRepeatLabel').textContent=t('alarmRepeatLabel');
+      document.getElementById('alarmRepeatSelect').options[0].text=t('alarmOnce');
+      document.getElementById('alarmRepeatSelect').options[1].text=t('alarmDaily');
+      document.getElementById('alarmRepeatSelect').options[2].text=t('alarmWeekly');
+      document.getElementById('alarmSoundLabel').textContent=t('alarmSoundLabel');
+      document.getElementById('alarmSaveBtn').textContent=t('alarmSave');
+      document.getElementById('alarmEmptyText').textContent=t('alarmEmpty');
+      document.getElementById('dismissAlarmBtn').textContent=t('alarmDismiss');
+      // Update date input placeholder
+      document.getElementById('alarmDateInput').placeholder = t('alarmDatePlaceholder');
+      renderAlarms(); updateAlarmBadge();
+    }
+
+    // ===== Calendar and Stats =====
+    const todayJalali=gregorianToJalali(TODAY);
+    let calViewJY=todayJalali.jy, calViewJM=todayJalali.jm;
+    const PERSIAN_DOW=['ش','ی','د','س','چ','پ','ج'], ENGLISH_DOW=['S','M','T','W','T','F','S'];
+    function renderCalendar(){ /* same as before */ 
+      const grid=document.getElementById('calGrid'), titleEl=document.getElementById('calTitle');
+      const info=jalaliMonthInfo(calViewJY, calViewJM);
+      if(!info){ grid.innerHTML=''; titleEl.textContent='—'; return; }
+      titleEl.textContent=currentLang==='fa'?formatJalali(info.firstGregorian,{year:'numeric',month:'long'}):formatEnglish(info.firstGregorian,{year:'numeric',month:'long'});
+      const jsDow=info.firstGregorian.getDay(), leadingBlanks=(jsDow+1)%7;
+      const dowLabels=currentLang==='fa'?PERSIAN_DOW:ENGLISH_DOW;
+      let html=dowLabels.map(d=>`<div class="cal-dow">${d}</div>`).join('');
+      for(let i=0;i<leadingBlanks;i++) html+='<div class="cal-cell is-empty"></div>';
+      const todayMidnight=new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate());
+      for(let day=1; day<=info.daysInMonth; day++){
+        const d=new Date(info.firstGregorian.getFullYear(), info.firstGregorian.getMonth(), info.firstGregorian.getDate()+day-1);
+        const key=getDateKey(d);
+        const entry=entries[key];
+        const isFuture=d.getTime()>todayMidnight.getTime();
+        const isToday=key===todayKey;
+        let cls='cal-cell', style='';
+        if(isFuture) cls+=' is-future';
+        if(isToday) cls+=' is-today';
+        if(entry){ cls+=' has-data'; style=`background:${tierDot(entry.scores.total)};`; }
+        html+=`<div class="${cls}" style="${style}" data-key="${key}" data-has-data="${entry?'1':'0'}" data-future="${isFuture?'1':'0'}">${toFa(day)}</div>`;
+      }
+      grid.innerHTML=html;
+      // استفاده از event delegation برای کلیک روی سلول‌ها
+      grid.removeEventListener('click', gridClickHandler);
+      grid.addEventListener('click', gridClickHandler);
+    }
+
+    // تابع جداگانه برای مدیریت کلیک روی سلول‌های تقویم
+    function gridClickHandler(e) {
+      const cell = e.target.closest('.cal-cell[data-key]');
+      if (!cell) return;
+      // جلوگیری از کلیک روی روزهای آینده
+      if (cell.dataset.future === '1') return;
+      const key = cell.dataset.key;
+      if (entries[key]) enterEditMode(key);
+      else enterBackfillMode(key);
+    }
+
+    function enterBackfillMode(key){ editingKey=key; state=Object.assign({},DEFAULT_STATE); savedSnapshot=null; syncFormUI(); onStateChange(); renderAnalysis(null); document.getElementById('gaugeDate').textContent=gaugeDateLabel(key); document.getElementById('editBanner').style.display='flex'; document.getElementById('editBannerDate').textContent=currentLang==='fa'?formatJalali(parseDateKey(key),{day:'numeric',month:'long'})+' (ثبت نشده)':formatEnglish(parseDateKey(key),{day:'numeric',month:'long'})+' (not recorded)'; document.querySelector('.panel-left').scrollIntoView({behavior:'smooth',block:'start'}); }
+
+    document.getElementById('calPrevBtn').addEventListener('click', ()=>{ calViewJM--; if(calViewJM<1){ calViewJM=12; calViewJY--; } renderCalendar(); renderStatsDashboard(); });
+    document.getElementById('calNextBtn').addEventListener('click', ()=>{ calViewJM++; if(calViewJM>12){ calViewJM=1; calViewJY++; } renderCalendar(); renderStatsDashboard(); });
+    document.getElementById('calSearchBtn').addEventListener('click', ()=>{
+      const query=document.getElementById('calSearchInput').value.trim();
+      if(!query) return;
+      let d=parseJalaliDate(query);
+      if(!d){ const parts=query.split(/[-\/]/).map(Number); if(parts.length===3){ const [y,m,day]=parts; if(y>0 && m>=1 && m<=12 && day>=1 && day<=31) d=new Date(y,m-1,day); } }
+      if(!d || isNaN(d.getTime())){ showToast(currentLang==='fa'?'تاریخ نامعتبر. مثال: ۱۴۰۳/۰۱/۱۵ یا 2024/03/15':'Invalid date. Example: 1403/01/15 or 2024/03/15'); return; }
+      const j=gregorianToJalali(d); calViewJY=j.jy; calViewJM=j.jm; renderCalendar(); renderStatsDashboard(); document.getElementById('calSearchInput').value=''; showToast((currentLang==='fa'?'رفتن به ':'Go to ')+(currentLang==='fa'?formatJalali(d,{year:'numeric',month:'long'}):formatEnglish(d,{year:'numeric',month:'long'})));
+    });
+    document.getElementById('calSearchInput').addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('calSearchBtn').click(); });
+
+    function renderStatsDashboard(){ /* same as before */ 
+      const subtitle=document.getElementById('statsSubtitle'), grid=document.getElementById('statsGrid');
+      const info=jalaliMonthInfo(calViewJY, calViewJM);
+      if(!info){ grid.innerHTML=''; return; }
+      subtitle.textContent=(currentLang==='fa'?'آمار ':'Stats for ')+(currentLang==='fa'?formatJalali(info.firstGregorian,{year:'numeric',month:'long'}):formatEnglish(info.firstGregorian,{year:'numeric',month:'long'}));
+      const monthEntries=Object.keys(entries).filter(k=>{ const j=gregorianToJalali(parseDateKey(k)); return j.jy===calViewJY && j.jm===calViewJM; }).map(k=>({key:k, data:entries[k]}));
+      if(monthEntries.length===0){ grid.innerHTML='<div class="empty-state" style="grid-column:1/-1;"><span class="emoji">📊</span><span>'+(currentLang==='fa'?'این ماه هنوز داده‌ای ثبت نشده.':'No data recorded this month.')+'</span></div>'; return; }
+      const avg=(arr)=>arr.reduce((a,b)=>a+b,0)/arr.length;
+      const avgSleep=avg(monthEntries.map(e=>e.data.sleepHours)), avgExercise=avg(monthEntries.map(e=>e.data.exerciseMinutes)), avgScore=Math.round(avg(monthEntries.map(e=>e.data.scores.total)));
+      let best=monthEntries[0], worst=monthEntries[0];
+      monthEntries.forEach(e=>{ if(e.data.scores.total>best.data.scores.total) best=e; if(e.data.scores.total<worst.data.scores.total) worst=e; });
+      function dayLabel(key){ return currentLang==='fa'?formatJalali(parseDateKey(key),{day:'numeric',month:'short'}):formatEnglish(parseDateKey(key),{day:'numeric',month:'short'}); }
+      grid.innerHTML=`<div class="stat-tile"><div class="stat-tile-label">${currentLang==='fa'?'میانگین امتیاز':'Avg Score'}</div><div class="stat-tile-value">${toFa(avgScore)}</div><div class="stat-tile-sub">${toFa(monthEntries.length)} ${currentLang==='fa'?'روز ثبت‌شده':'days recorded'}</div></div><div class="stat-tile"><div class="stat-tile-label">${currentLang==='fa'?'میانگین خواب':'Avg Sleep'}</div><div class="stat-tile-value">${toFa(avgSleep.toFixed(1))}</div><div class="stat-tile-sub">${currentLang==='fa'?'ساعت در شب':'hours/night'}</div></div><div class="stat-tile"><div class="stat-tile-label">${currentLang==='fa'?'میانگین ورزش':'Avg Exercise'}</div><div class="stat-tile-value">${toFa(Math.round(avgExercise))}</div><div class="stat-tile-sub">${currentLang==='fa'?'دقیقه در روز':'min/day'}</div></div><div class="stat-tile"><div class="stat-tile-label">${currentLang==='fa'?'بهترین روز':'Best Day'}</div><div class="stat-tile-value">${toFa(best.data.scores.total)}</div><div class="stat-tile-sub">${dayLabel(best.key)}</div></div>`;
+    }
+
+    document.getElementById('exportBtn').addEventListener('click', ()=>{
+      const payload={ app:'rooznegar-salamat', exportedAt:new Date().toISOString(), entries, todos, settings, userProfile, alarms };
+      const blob=new Blob([JSON.stringify(payload,null,2)], {type:'application/json'});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url; a.download='rooznegar-salamat-backup-'+todayKey+'.json';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+      showToast(currentLang==='fa'?'فایل پشتیبان دانلود شد ✅':'Backup file downloaded ✅');
+    });
+
+    const importFileInput=document.getElementById('importFileInput');
+    document.getElementById('importBtn').addEventListener('click', ()=>importFileInput.click());
+    importFileInput.addEventListener('change', (e)=>{
+      const file=e.target.files[0];
+      if(!file) return;
+      const reader=new FileReader();
+      reader.onload = ()=>{
+        let parsed;
+        try{ parsed=JSON.parse(reader.result); }catch(err){ showToast(currentLang==='fa'?'فایل معتبر نیست':'Invalid file'); importFileInput.value=''; return; }
+        if(!parsed || typeof parsed!=='object' || !parsed.entries){ showToast(currentLang==='fa'?'ساختار فایل پشتیبان شناسایی نشد':'Backup structure not recognized'); importFileInput.value=''; return; }
+        openConfirm(t('modalTitle'), currentLang==='fa'?'داده‌های فعلی با محتوای این فایل جایگزین می‌شن. مطمئنی؟':'Current data will be replaced. Are you sure?', async ()=>{
+          entries=parsed.entries||{};
+          todos=parsed.todos||[];
+          settings=Object.assign({}, DEFAULT_SETTINGS, parsed.settings||{});
+          userProfile=parsed.userProfile||userProfile;
+          alarms=parsed.alarms||[];
+          await persistEntries(entries); await persistTodos(); await persistSettings();
+          if(userProfile) await persistUser(userProfile);
+          await persistAlarms();
+          exitEditMode();
+          renderChart(); renderHistory(); renderStreak(); renderTodos(); renderCalendar(); renderStatsDashboard(); updateProfileUI(); renderAlarms(); updateAlarmBadge();
+          showToast(currentLang==='fa'?'بازیابی با موفقیت انجام شد ✅':'Restore successful ✅');
+          importFileInput.value='';
+        });
+      };
+      reader.readAsText(file);
+    });
+
+    let lastAccel={x:0,y:0,z:0}, stepCount=0, lastStepTime=0, accelBuffer=[], isStepCounterReady=false;
+    function initStepCounter(){
+      if(!window.DeviceMotionEvent){ document.getElementById('stepsAutoBadge').textContent=t('stepsUnsupported'); return; }
+      if(entries[todayKey] && entries[todayKey].steps){ stepCount=entries[todayKey].steps; state.steps=stepCount; document.getElementById('stepsInput').value=stepCount; document.getElementById('stepsVal').textContent=toFa(stepCount)+' '+(currentLang==='fa'?'قدم':'steps'); }
+      let threshold=3.5, stepTimeout=120;
+      function handleMotion(event){
+        const accel=event.accelerationIncludingGravity;
+        if(!accel) return;
+        const dx=accel.x-lastAccel.x, dy=accel.y-lastAccel.y, dz=accel.z-lastAccel.z;
+        const delta=Math.sqrt(dx*dx+dy*dy+dz*dz);
+        lastAccel={x:accel.x,y:accel.y,z:accel.z};
+        const now=Date.now();
+        if(delta>threshold && (now-lastStepTime)>stepTimeout){
+          accelBuffer.push(delta);
+          if(accelBuffer.length>6) accelBuffer.shift();
+          if(accelBuffer.length>=3){
+            const avg=accelBuffer.reduce((a,b)=>a+b,0)/accelBuffer.length;
+            if(avg>threshold*0.5){
+              stepCount++; lastStepTime=now; state.steps=stepCount;
+              document.getElementById('stepsInput').value=state.steps;
+              document.getElementById('stepsVal').textContent=toFa(state.steps)+' '+(currentLang==='fa'?'قدم':'steps');
+              document.getElementById('stepsAutoBadge').textContent=t('stepsActive');
+              onStateChange();
+            }
+          }
+        }
+      }
+      if(typeof DeviceMotionEvent.requestPermission==='function'){
+        DeviceMotionEvent.requestPermission().then(state=>{
+          if(state==='granted'){ window.addEventListener('devicemotion', handleMotion); document.getElementById('stepsAutoBadge').textContent=t('stepsDone'); isStepCounterReady=true; }
+          else { document.getElementById('stepsAutoBadge').textContent='⚠️ '+(currentLang==='fa'?'دسترسی به گام‌شمار داده نشد':'Permission denied'); }
+        }).catch(err=>{ console.warn('Permission error:',err); window.addEventListener('devicemotion', handleMotion); document.getElementById('stepsAutoBadge').textContent=t('stepsDone'); isStepCounterReady=true; });
+      } else { window.addEventListener('devicemotion', handleMotion); document.getElementById('stepsAutoBadge').textContent=t('stepsDone'); isStepCounterReady=true; }
+    }
+
+    const profileModalOverlay=document.getElementById('profileModalOverlay');
+    document.getElementById('profileEditBtn').addEventListener('click', ()=>{ populateProfileEditForm(); profileModalOverlay.classList.add('visible'); });
+    document.getElementById('profileAvatar').addEventListener('click', ()=>{ populateProfileEditForm(); profileModalOverlay.classList.add('visible'); });
+    document.getElementById('profileCancel').addEventListener('click', ()=>profileModalOverlay.classList.remove('visible'));
+    profileModalOverlay.addEventListener('click', e=>{ if(e.target===profileModalOverlay) profileModalOverlay.classList.remove('visible'); });
+    document.getElementById('profileSave').addEventListener('click', async ()=>{
+      const name=document.getElementById('profileNameInput').value.trim()||null;
+      const age=parseInt(document.getElementById('profileAgeInput').value)||null;
+      const height=Number(document.getElementById('profileHeightInput').value)||null;
+      const weight=Number(document.getElementById('profileWeightInput').value)||null;
+      if(age && (age<1||age>120)){ showToast(currentLang==='fa'?'سن معتبر وارد کن (۱ تا ۱۲۰ سال).':'Enter a valid age (1-120).'); return; }
+      if(height && (height<50||height>300)){ showToast(currentLang==='fa'?'قد معتبر وارد کن (۵۰ تا ۳۰۰ سانتی‌متر).':'Enter a valid height (50-300 cm).'); return; }
+      if(weight && (weight<10||weight>500)){ showToast(currentLang==='fa'?'وزن معتبر وارد کن (۱۰ تا ۵۰۰ کیلوگرم).':'Enter a valid weight (10-500 kg).'); return; }
+      userProfile={ ...userProfile, name, age, height, weight, isGuest:false };
+      await persistUser(userProfile);
+      if(height){ settings.height=height; await persistSettings(); }
+      profileModalOverlay.classList.remove('visible');
+      updateProfileUI(); updateBmiReadout(); renderGoals();
+      showToast(currentLang==='fa'?'پروفایل با موفقیت به‌روز شد ✅':'Profile updated successfully ✅');
+    });
+
+    function populateProfileEditForm() {
+      if (!userProfile) {
+        document.getElementById('profileNameInput').value = '';
+        document.getElementById('profileAgeInput').value = '';
+        document.getElementById('profileHeightInput').value = '';
+        document.getElementById('profileWeightInput').value = '';
+        return;
+      }
+      document.getElementById('profileNameInput').value = userProfile.name || '';
+      document.getElementById('profileAgeInput').value = userProfile.age || '';
+      document.getElementById('profileHeightInput').value = userProfile.height || '';
+      document.getElementById('profileWeightInput').value = userProfile.weight || '';
+    }
+
+    // PWA
+    let deferredInstallPrompt=null;
+    const installBanner=document.getElementById('installBanner'), installBtn=document.getElementById('installBtn'), installDismiss=document.getElementById('installDismiss');
+    const INSTALL_DISMISS_KEY='pwa-install-dismissed';
+    window.addEventListener('beforeinstallprompt', (e)=>{
+      e.preventDefault(); deferredInstallPrompt=e;
+      let dismissed=false; try{ dismissed=localStorage.getItem(INSTALL_DISMISS_KEY)==='1'; }catch(err){}
+      const isStandalone=window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+      if(!dismissed && !isStandalone) installBanner.classList.add('visible');
+    });
+    installBtn && installBtn.addEventListener('click', async ()=>{
+      if(!deferredInstallPrompt) return;
+      installBanner.classList.remove('visible');
+      deferredInstallPrompt.prompt();
+      try{ await deferredInstallPrompt.userChoice; }catch(e){}
+      deferredInstallPrompt=null;
+    });
+    installDismiss && installDismiss.addEventListener('click', ()=>{
+      installBanner.classList.remove('visible');
+      try{ localStorage.setItem(INSTALL_DISMISS_KEY, '1'); }catch(e){}
+    });
+    window.addEventListener('appinstalled', ()=>{ installBanner.classList.remove('visible'); deferredInstallPrompt=null; });
+    try {
+      if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          try { navigator.serviceWorker.register('./sw.js').catch(() => {}); } catch (e) {}
+        });
+      }
+    } catch (e) { /* Service Worker disabled (e.g. sandboxed iframe) */ }
+
+    if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission();
+
+    // ===== Animated Health Tips =====
+    const HEALTH_TIPS = {
+      fa: [
+        { emoji: '😴', title: 'خواب کافی', text: 'هر شب ۷ تا ۹ ساعت بخواب تا تمرکز و حافظه‌ات در کلاس قوی‌تر بشه.' },
+        { emoji: '💧', title: 'آب بنوش', text: 'روزانه حداقل ۸ لیوان آب بنوش. کم‌آبی باعث خستگی و سردرد می‌شه.' },
+        { emoji: '🥗', title: 'تغذیه رنگارنگ', text: 'در هر وعده میوه و سبزیجات تازه بذار. رنگ‌های مختلف یعنی ویتامین‌های مختلف!' },
+        { emoji: '🏃', title: 'حرکت روزانه', text: 'حداقل ۳۰ دقیقه پیاده‌روی یا ورزش سبک انجام بده. بدنت ازت ممنون می‌شه.' },
+        { emoji: '🧘', title: 'تنفس عمیق', text: 'وقتی استرس داری، ۴ ثانیه نفس بکش، ۴ ثانیه نگه دار و ۴ ثانیه بیرون بده.' },
+        { emoji: '📵', title: 'استراحت از صفحه', text: 'هر ۲۰ دقیقه یک بار به نقطه دور نگاه کن تا چشم‌هات خسته نشن.' },
+        { emoji: '🍎', title: 'میان‌وعده سالم', text: 'به جای چیپس و شیرینی، یک سیب یا مشت آجیل بخور تا انرژی پایدار داشته باشی.' },
+        { emoji: '🌅', title: 'صبح زود', text: 'صبح‌ها نور طبیعی بگیر. کمک می‌کنه ساعت بیولوژیک بدنت تنظیم بشه.' }
+      ],
+      en: [
+        { emoji: '😴', title: 'Enough Sleep', text: 'Sleep 7–9 hours every night so your focus and memory stay sharp in class.' },
+        { emoji: '💧', title: 'Stay Hydrated', text: 'Drink at least 8 glasses of water daily. Dehydration causes fatigue and headaches.' },
+        { emoji: '🥗', title: 'Colorful Plate', text: 'Add fresh fruits and veggies to every meal. Different colors mean different vitamins!' },
+        { emoji: '🏃', title: 'Daily Movement', text: 'Walk or do light exercise for at least 30 minutes. Your body will thank you.' },
+        { emoji: '🧘', title: 'Deep Breathing', text: 'When stressed, breathe in for 4s, hold for 4s, and out for 4s.' },
+        { emoji: '📵', title: 'Screen Break', text: 'Every 20 minutes look at something far away to rest your eyes.' },
+        { emoji: '🍎', title: 'Healthy Snack', text: 'Swap chips for an apple or a handful of nuts for steady energy.' },
+        { emoji: '🌅', title: 'Morning Light', text: 'Get natural light in the morning to help set your body clock.' }
+      ]
+    };
+    let tipIndex = 0;
+    let tipAutoTimer = null;
+
+    function renderHealthTips() {
+      const tips = HEALTH_TIPS[currentLang] || HEALTH_TIPS.fa;
+      const carousel = document.getElementById('tipsCarousel');
+      const dots = document.getElementById('tipsDots');
+      if (!carousel || !dots) return;
+
+      carousel.innerHTML = tips.map((tip, i) => `
+        <div class="tip-slide ${i === tipIndex ? 'active' : ''}" data-idx="${i}">
+          <div class="tip-emoji">${tip.emoji}</div>
+          <div class="tip-content">
+            <div class="tip-title">${tip.title}</div>
+            <div class="tip-text">${tip.text}</div>
+          </div>
+        </div>
+      `).join('');
+
+      dots.innerHTML = tips.map((_, i) =>
+        `<button class="tip-dot ${i === tipIndex ? 'active' : ''}" data-idx="${i}" aria-label="tip ${i+1}"></button>`
+      ).join('');
+
+      document.getElementById('tipsCounter').textContent =
+        toFa(tipIndex + 1) + ' / ' + toFa(tips.length);
+
+      dots.querySelectorAll('.tip-dot').forEach(dot => {
+        dot.addEventListener('click', () => {
+          tipIndex = Number(dot.dataset.idx);
+          showTip(tipIndex);
+          restartTipAuto();
+        });
+      });
+    }
+
+    function showTip(idx) {
+      const tips = HEALTH_TIPS[currentLang] || HEALTH_TIPS.fa;
+      tipIndex = ((idx % tips.length) + tips.length) % tips.length;
+      document.querySelectorAll('.tip-slide').forEach((el, i) => {
+        el.classList.toggle('active', i === tipIndex);
+      });
+      document.querySelectorAll('.tip-dot').forEach((el, i) => {
+        el.classList.toggle('active', i === tipIndex);
+      });
+      document.getElementById('tipsCounter').textContent =
+        toFa(tipIndex + 1) + ' / ' + toFa(tips.length);
+    }
+
+    function nextTip() { showTip(tipIndex + 1); }
+    function prevTip() { showTip(tipIndex - 1); }
+
+    function restartTipAuto() {
+      if (tipAutoTimer) clearInterval(tipAutoTimer);
+      tipAutoTimer = setInterval(() => { nextTip(); }, 5500);
+    }
+
+    document.getElementById('tipsNextBtn').addEventListener('click', () => { nextTip(); restartTipAuto(); });
+    document.getElementById('tipsPrevBtn').addEventListener('click', () => { prevTip(); restartTipAuto(); });
+
+    async function init(){
+      const theme=loadTheme(); applyTheme(theme);
+      const lang=loadLang(); applyLanguage(lang);
+      buildGauge();
+      document.getElementById('gaugeDate').textContent=gaugeDateLabel(todayKey);
+      entries=await loadAllEntries();
+      todos=await loadTodos();
+      settings=await loadSettings();
+      userProfile=await loadUser();
+      alarms=await loadAlarms();
+      document.getElementById('appShell').style.display='block';
+      updateProfileUI();
+      if(entries[todayKey]){ state=stateFromEntry(entries[todayKey]); savedSnapshot=JSON.stringify(state); }
+      syncFormUI();
+      const scores=computeScores(state);
+      renderGauge(scores, true);
+      refreshSaveStatus();
+      renderGoals();
+      renderAnalysis(entries[todayKey]||null);
+      renderChart(); renderHistory(); renderStreak(); renderTodos(); renderCalendar(); renderStatsDashboard();
+      renderAlarms(); updateAlarmBadge();
+      renderHealthTips();
+      restartTipAuto();
+      initStepCounter();
+      const vStatus=document.getElementById('voiceStatus');
+      if(vStatus && !vStatus.classList.contains('success') && !vStatus.classList.contains('error')) {
+        vStatus.innerHTML='<span class="samples">📢 '+t('voiceSamples')+' ⚠️ '+t('voiceRequiresInternet')+'</span>';
+      }
+      if(alarmCheckInterval) clearInterval(alarmCheckInterval);
+      alarmCheckInterval = setInterval(checkAlarms, 15000);
+      setTimeout(checkAlarms, 1000);
+      window._initialized = true;
+    }
+
+    init();
+  })();
+  </script>
+</body>
+</html>
